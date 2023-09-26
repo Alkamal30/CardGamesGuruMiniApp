@@ -6,5 +6,6 @@ public interface IGameService
 {
     public Task<Game> GetGameByIdAsync(int id);
     public Task<List<Game>> GetGamesAsync();
+    public Task CreateGameAsync(Game game);
 
 }

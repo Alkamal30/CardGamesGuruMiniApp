@@ -12,16 +12,16 @@ public class GetGameInformationByIdQuery : IRequest<Game>
 public class GetGameInformationByIdHandler : IRequestHandler<GetGameInformationByIdQuery, Game>
 {
 
-    private readonly IGameService _gameService;
+    private readonly IGameService gameService;
     
     public GetGameInformationByIdHandler(IGameService gameService)
     {
-        _gameService = gameService;
+        this.gameService = gameService;
     }
     
     public async Task<Game> Handle(GetGameInformationByIdQuery request, CancellationToken cancellationToken)
     {
-        var result = await _gameService.GetGameByIdAsync(request.Id);
+        var result = await gameService.GetGameByIdAsync(request.Id);
 
         return result;
     }

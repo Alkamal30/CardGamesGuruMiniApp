@@ -1,17 +1,22 @@
-using MediatR;
-using Services.CardGamesGuruMiniApp.Handlers.GameHandler;
+using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
+using Infrastructure.CardGamesGuruMiniApp.Repositories;
+using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.GameService;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
-using System.Reflection;
+using WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GameService)));
-builder.Services.AddScoped<IGameService, GameService>();
-var app = builder.Build();
+builder.Services.AddSingleton<IGameRepository, GameRepository>();
+builder.Services.AddSingleton<IGameService, GameService>();
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddConfig();
 
+
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {
     app.UseExceptionHandler("/Home/Error");
@@ -31,3 +36,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+
+
