@@ -8,9 +8,9 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
 {
     public class GameRepository : BaseRepository<GameBson>, IGameRepository
     {
-        public GameRepository(IMongoDatabase database, IOptions<MongoDbOptions> mongoDbOptions) : base(database, mongoDbOptions)
+        public GameRepository(IMongoDatabase database,IOptions<MongoDbOptions> mongoDbOptions) : base(database, mongoDbOptions)
         {
-
+            collection = MongoCollections.Games;
         }
 
         public async Task CreateGame(GameBson game)

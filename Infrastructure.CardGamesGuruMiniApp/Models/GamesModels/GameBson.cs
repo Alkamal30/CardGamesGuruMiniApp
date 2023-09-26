@@ -16,7 +16,7 @@ namespace Infrastructure.CardGamesGuruMiniApp.Models.GamesModels
         public GameType GameType { get; set; }
 
         public string NameIndex { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } 
         public string Description { get; set; }
 
         [BsonRepresentation(BsonType.DateTime)]

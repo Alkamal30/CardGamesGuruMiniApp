@@ -41,7 +41,7 @@ namespace WebApp
                     new MongoClient(serviceProvider.GetRequiredService<IOptions<MongoDbOptions>>().Value.ConnectionString))
                 .AddSingleton<IMongoDatabase>(serviceProvider => serviceProvider
                     .GetRequiredService<IMongoClient>()
-                    .GetDatabase(serviceProvider.GetRequiredService<IOptions<MongoDbOptions>>().Value.DataBaseName));
+                    .GetDatabase(serviceProvider.GetRequiredService<IOptions<MongoDbOptions>>().Value.DatabaseName));
 
             RegisterMongoMappings();
         }

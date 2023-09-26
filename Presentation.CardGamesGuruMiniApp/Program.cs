@@ -1,13 +1,8 @@
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
-using MediatR;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using Services.CardGamesGuruMiniApp.Handlers.GameHandler;
 using Services.CardGamesGuruMiniApp.Services.GameService;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
-using System.Reflection;
 using WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
