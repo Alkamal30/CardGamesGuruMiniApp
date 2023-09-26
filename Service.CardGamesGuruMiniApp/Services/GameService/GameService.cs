@@ -57,7 +57,11 @@ public class GameService : IGameService
             {
                 Id = new Guid(item.Id),
                 Name = item.Name,
-                GameType = item.GameType
+                GameType = item.GameType,
+                CreatedDate = item.CreatedDate,
+                NameIndex=item.NameIndex,
+                Description = item.Description,
+                UpdatedDate = item.UpdatedDate
             });
         }
 
