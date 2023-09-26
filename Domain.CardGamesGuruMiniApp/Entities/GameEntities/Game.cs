@@ -1,6 +1,4 @@
 using Domain.CardGamesGuruMiniApp.Enums.GameEnums;
-using Newtonsoft.Json.Converters;
-using System.Text.Json.Serialization;
 
 namespace Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 
