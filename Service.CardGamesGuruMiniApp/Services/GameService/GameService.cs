@@ -2,7 +2,6 @@ using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
-using MongoDB.Bson;
 using AutoMapper;
 
 namespace Services.CardGamesGuruMiniApp.Services.GameService;
@@ -25,6 +24,7 @@ public class GameService : IGameService
             Description = game.Description,
             NameIndex = game.NameIndex,
             CreatedDate = game.CreatedDate,
+            GameType = game.GameType,
         };
         item.Id = game.Id.ToString();
 
@@ -35,13 +35,40 @@ public class GameService : IGameService
 
     }
 
-    public async Task<Game> GetGameByIdAsync(int id)
+    public async Task<Game> GetGameByIdAsync(string id)
     {
-        return new Game()
-        {
-            Id = Guid.NewGuid(),
-            Name = "ID = " + id
-        };
+        var result = new Game();
+
+        var game = await gameRepository.GetGameById(id);
+        if (game == null) return result;
+
+        result.Name = game.Name;
+        result.Description = game.Description;
+        result.NameIndex = game.NameIndex;
+        result.CreatedDate = game.CreatedDate;
+        result.UpdatedDate = game.UpdatedDate;
+        result.Id = new Guid(game.Id);
+        result.GameType = game.GameType;
+
+        return result;
+    }
+
+    public async Task<Game> GetGameByNameIndexAsync(string nameIndex)
+    {
+        var result = new Game();
+
+        var game = await gameRepository.GetGameByNameIndex(nameIndex);
+        if (game == null) return result;
+
+        result.Name = game.Name;
+        result.Description = game.Description;
+        result.NameIndex = game.NameIndex;
+        result.CreatedDate = game.CreatedDate;
+        result.UpdatedDate = game.UpdatedDate;
+        result.Id = new Guid(game.Id);
+        result.GameType = game.GameType;
+
+        return result;
     }
 
     public async Task<List<Game>> GetGamesAsync()
@@ -66,5 +93,23 @@ public class GameService : IGameService
         }
 
         return result;
+    }
+
+    public async Task<Game> UpdateGameAsync(Game game)
+    {
+        var request = new GameBson();
+
+        request.Name = game.Name;
+        request.Description = game.Description;
+        request.NameIndex = game.NameIndex;
+        request.CreatedDate = game.CreatedDate;
+        request.UpdatedDate = game.UpdatedDate;
+        request.Id = game.Id.ToString();
+        request.GameType = game.GameType;
+
+        var result = await gameRepository.UpdateGame(request);
+        if(result == null) return new Game();
+
+        return game;
     }
 }

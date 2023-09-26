@@ -1,4 +1,5 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
+using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
@@ -25,6 +26,30 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             }
         }
 
+        public async Task<GameBson> GetGameById(string id)
+        {
+            try
+            {
+                return await Items.Find(Builders<GameBson>.Filter.Eq(x => x.Id, id)).FirstAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<GameBson> GetGameByNameIndex(string nameIndex)
+        {
+            try
+            {
+                return await Items.Find(Builders<GameBson>.Filter.Eq(x => x.NameIndex, nameIndex)).FirstAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<List<GameBson>> GetGames()
         {
             try
@@ -32,6 +57,19 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
                 return await Items.Find(Builders<GameBson>.Filter.Empty).ToListAsync();
             }
             catch(InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<GameBson> UpdateGame(GameBson game)
+        {
+            try
+            {
+                await Items.ReplaceOneAsync(Builders<GameBson>.Filter.Eq(x => x.NameIndex, game.NameIndex),game);
+                return game;
+            }
+            catch (InvalidOperationException ex)
             {
                 throw new Exception(ex.Message);
             }

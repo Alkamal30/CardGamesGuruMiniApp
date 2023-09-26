@@ -9,8 +9,9 @@ using System.Text.Json.Serialization;
 namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
 {
 
-    public class CreateGameQuery : IRequest
+    public class UpdateGameQuery : IRequest
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string NameIndex { get; set; }
         public string Description { get; set; }
@@ -18,27 +19,27 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
     }
 
 
-    internal class CreateGameHandler : IRequestHandler<CreateGameQuery>
+    internal class UpdateGameHandler : IRequestHandler<UpdateGameQuery>
     {
         private readonly IGameService gameService;
 
-        public CreateGameHandler(IGameService gameService)
+        public UpdateGameHandler(IGameService gameService)
         {
             this.gameService = gameService;
         }
-        public async Task Handle(CreateGameQuery request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateGameQuery request, CancellationToken cancellationToken)
         {
             var game = new Game()
             {
-                Id = Guid.NewGuid(),
+                Id = new Guid(request.Id),
                 Name = request.Name,
                 Description = request.Description,
                 GameType = EnumMapping.MapGameType(request.GameType),
-                CreatedDate = DateTime.UtcNow,
+                UpdatedDate = DateTime.UtcNow,
                 NameIndex = request.NameIndex
             };
 
-            await gameService.CreateGameAsync(game);
+            await gameService.UpdateGameAsync(game);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Infrastructure.CardGamesGuruMiniApp.Models.GamesModels
         [BsonId]
         public string Id { get; set; }
 
-        [JsonConverter(typeof(JsonStringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public GameType GameType { get; set; }
 

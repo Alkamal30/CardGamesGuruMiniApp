@@ -6,7 +6,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler;
 
 public class GetGameInformationByIdQuery : IRequest<Game>
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 }
 
 public class GetGameInformationByIdHandler : IRequestHandler<GetGameInformationByIdQuery, Game>
