@@ -35,14 +35,24 @@ public class GameService : IGameService
 
     }
 
-    public async Task<Game> GetGameByIdAsync(int id)
+    public async Task<Game> GetGameByIdAsync(string id)
     {
-        return new Game()
-        {
-            Id = Guid.NewGuid(),
-            Name = "ID = " + id
-        };
+        var result = new Game();
+
+        var game = await gameRepository.GetGameById(id);
+        if (game == null) return result;
+
+        result.Name = game.Name;
+        result.Description = game.Description;
+        result.NameIndex = game.NameIndex;
+        result.CreatedDate = game.CreatedDate;
+        result.UpdatedDate = game.UpdatedDate;
+        result.Id = new Guid(game.Id);
+        result.GameType = game.GameType;
+
+        return result;
     }
+
 
     public async Task<List<Game>> GetGamesAsync()
     {

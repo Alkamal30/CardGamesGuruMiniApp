@@ -14,7 +14,7 @@ public class GameController : ControllerBase
 
     [HttpGet]
     [Route("gamebyid")]
-    public async Task<ActionResult> GetGameInformationById(int id)
+    public async Task<ActionResult> GetGameInformationById(string id)
     {
 
         var result = await _mediator.Send(new GetGameInformationByIdQuery()

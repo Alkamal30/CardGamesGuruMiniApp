@@ -1,4 +1,5 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
+using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
@@ -20,6 +21,18 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
                 await Items.InsertOneAsync(game);
             }
             catch(InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<GameBson> GetGameById(string id)
+        {
+            try
+            {
+                return await Items.Find(Builders<GameBson>.Filter.Eq(x => x.Id, id)).FirstAsync();
+            }
+            catch (InvalidOperationException ex)
             {
                 throw new Exception(ex.Message);
             }
