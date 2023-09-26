@@ -25,6 +25,7 @@ public class GameService : IGameService
             Description = game.Description,
             NameIndex = game.NameIndex,
             CreatedDate = game.CreatedDate,
+            GameType = game.GameType,
         };
         item.Id = game.Id.ToString();
 

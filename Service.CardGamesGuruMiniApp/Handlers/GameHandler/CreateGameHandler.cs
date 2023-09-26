@@ -1,5 +1,7 @@
-﻿using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
+﻿using AutoMapper.Internal.Mappers;
+using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Domain.CardGamesGuruMiniApp.Enums.GameEnums;
+using Domain.CardGamesGuruMiniApp.Mapping;
 using MediatR;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
 using System.Text.Json.Serialization;
@@ -12,7 +14,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         public string Name { get; set; }
         public string NameIndex { get; set; }
         public string Description { get; set; }
-        //public GameType GameType { get; set; }
+        public string GameType { get; set; }
     }
 
 
@@ -31,7 +33,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
                 Id = Guid.NewGuid(),
                 Name = request.Name,
                 Description = request.Description,
-                //GameType = request.GameType,
+                GameType = EnumMapping.MapGameType(request.GameType),
                 CreatedDate = DateTime.UtcNow,
                 NameIndex = request.NameIndex
             };
