@@ -5,10 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace Infrastructure.CardGamesGuruMiniApp.Models.GamesModels
 {
+
     public class GameBson
     {
         [BsonElement("_id")]
-        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         [BsonRepresentation(BsonType.String)]

@@ -1,25 +1,10 @@
-using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
-using Infrastructure.CardGamesGuruMiniApp.Repositories;
-using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
-using Services.CardGamesGuruMiniApp.Services.GameService;
-using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
-using System.Text.Json.Serialization;
 using WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GameService)));
-builder.Services.AddSingleton<IGameRepository, GameRepository>();
-builder.Services.AddSingleton<IGameService, GameService>();
-builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddConfig();
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

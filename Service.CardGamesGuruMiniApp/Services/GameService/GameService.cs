@@ -26,7 +26,6 @@ public class GameService : IGameService
             CreatedDate = game.CreatedDate,
             GameType = game.GameType,
         };
-        item.Id = game.Id.ToString();
 
         //item = mapper.Map<GameBson>(game);
         
@@ -35,23 +34,6 @@ public class GameService : IGameService
 
     }
 
-    public async Task<Game> GetGameByIdAsync(string id)
-    {
-        var result = new Game();
-
-        var game = await gameRepository.GetGameById(id);
-        if (game == null) return result;
-
-        result.Name = game.Name;
-        result.Description = game.Description;
-        result.NameIndex = game.NameIndex;
-        result.CreatedDate = game.CreatedDate;
-        result.UpdatedDate = game.UpdatedDate;
-        result.Id = new Guid(game.Id);
-        result.GameType = game.GameType;
-
-        return result;
-    }
 
     public async Task<Game> GetGameByNameIndexAsync(string nameIndex)
     {
@@ -65,7 +47,6 @@ public class GameService : IGameService
         result.NameIndex = game.NameIndex;
         result.CreatedDate = game.CreatedDate;
         result.UpdatedDate = game.UpdatedDate;
-        result.Id = new Guid(game.Id);
         result.GameType = game.GameType;
 
         return result;
@@ -82,7 +63,6 @@ public class GameService : IGameService
         {
             result.Add(new Game
             {
-                Id = new Guid(item.Id),
                 Name = item.Name,
                 GameType = item.GameType,
                 CreatedDate = item.CreatedDate,
@@ -95,21 +75,17 @@ public class GameService : IGameService
         return result;
     }
 
-    public async Task<Game> UpdateGameAsync(Game game)
+    public async Task UpdateGameAsync(Game game)
     {
         var request = new GameBson();
 
         request.Name = game.Name;
         request.Description = game.Description;
         request.NameIndex = game.NameIndex;
-        request.CreatedDate = game.CreatedDate;
         request.UpdatedDate = game.UpdatedDate;
-        request.Id = game.Id.ToString();
         request.GameType = game.GameType;
 
-        var result = await gameRepository.UpdateGame(request);
-        if(result == null) return new Game();
+        await gameRepository.UpdateGame(request);
 
-        return game;
     }
 }

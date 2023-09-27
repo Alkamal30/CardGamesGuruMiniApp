@@ -11,7 +11,6 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
 
     public class UpdateGameQuery : IRequest
     {
-        public string Id { get; set; }
         public string Name { get; set; }
         public string NameIndex { get; set; }
         public string Description { get; set; }
@@ -31,10 +30,9 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         {
             var game = new Game()
             {
-                Id = new Guid(request.Id),
-                Name = request.Name,
-                Description = request.Description,
-                GameType = EnumMapping.MapGameType(request.GameType),
+                Name = String.IsNullOrEmpty(request.Name) ? String.Empty : request.Name,
+                Description = String.IsNullOrEmpty(request.Description) ? String.Empty : request.Description,
+                GameType = String.IsNullOrEmpty(request.GameType) ? GameType.NoPlayers : EnumMapping.MapGameType(request.GameType),
                 UpdatedDate = DateTime.UtcNow,
                 NameIndex = request.NameIndex
             };
