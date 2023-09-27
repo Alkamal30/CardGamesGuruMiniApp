@@ -16,12 +16,12 @@ namespace Domain.CardGamesGuruMiniApp.Mapping
 
             switch (gameType)
             {
-                case "NoPlayers":
-                    return GameType.NoPlayers; break;
-                case "Players":
-                    return GameType.Players; break;
+                case "NoPlayersJustCards":
+                    return GameType.NoPlayersJustCards; break;
+                case "MultiPlayerGame":
+                    return GameType.MultiPlayerGame; break;
                 default:
-                    return GameType.NoPlayers; break;
+                    return GameType.NoPlayersJustCards; break;
             }
         }
     }

@@ -6,7 +6,7 @@ namespace Domain.CardGamesGuruMiniApp.Enums.GameEnums
     [JsonConverter(typeof(StringEnumConverter))]
     public enum GameType
     {
-        NoPlayers,
-        Players
+        NoPlayersJustCards,
+        MultiPlayerGame
     }
 }
