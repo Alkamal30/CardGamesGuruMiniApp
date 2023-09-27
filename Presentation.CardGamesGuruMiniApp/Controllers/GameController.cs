@@ -13,19 +13,6 @@ public class GameController : ControllerBase
     public GameController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet]
-    [Route("gamebyid")]
-    public async Task<ActionResult> GetGameInformationById(string id)
-    {
-
-        var result = await _mediator.Send(new GetGameInformationByIdQuery()
-        {
-            Id = id
-        });
-        
-        return Ok(result);
-    }
-
-    [HttpGet]
     [Route("gamebyname")]
     public async Task<ActionResult> GetGameInformationByNameIndex(string nameIndex)
     {
@@ -55,7 +42,7 @@ public class GameController : ControllerBase
 
     [HttpPost]
     [Route("update")]
-    public async Task<ActionResult> Updateame(CreateGameQuery query)
+    public async Task<ActionResult> Updateame(UpdateGameQuery query)
     {
         await _mediator.Send(query);
         return Ok();

@@ -1,9 +1,14 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
+using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
+using Infrastructure.CardGamesGuruMiniApp.Repositories;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
+using Services.CardGamesGuruMiniApp.Services.GameService;
 using System.Transactions;
+using System.Text.Json.Serialization;
 
 namespace WebApp
 {
@@ -13,6 +18,15 @@ namespace WebApp
         {
             services.AddApplicationOptions<MongoDbOptions>(nameof(MongoDbOptions));
             services.AddMongoDatabase();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GameService)));
+            services.AddSingleton<IGameRepository, GameRepository>();
+            services.AddSingleton<IGameService, GameService>();
+            services.AddAutoMapper(typeof(Program));
+            services.AddControllers()
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    });
         }
 
         private static IServiceCollection AddApplicationOptions<TOptions>(

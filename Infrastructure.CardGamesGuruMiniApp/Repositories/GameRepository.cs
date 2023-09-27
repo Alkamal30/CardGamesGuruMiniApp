@@ -4,6 +4,7 @@ using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.Security.Claims;
 
 namespace Infrastructure.CardGamesGuruMiniApp.Repositories
 {
@@ -26,17 +27,6 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             }
         }
 
-        public async Task<GameBson> GetGameById(string id)
-        {
-            try
-            {
-                return await Items.Find(Builders<GameBson>.Filter.Eq(x => x.Id, id)).FirstAsync();
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
 
         public async Task<GameBson> GetGameByNameIndex(string nameIndex)
         {
@@ -62,12 +52,20 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             }
         }
 
-        public async Task<GameBson> UpdateGame(GameBson game)
+        public async Task UpdateGame(GameBson game)
         {
             try
             {
-                await Items.ReplaceOneAsync(Builders<GameBson>.Filter.Eq(x => x.NameIndex, game.NameIndex),game);
-                return game;
+                var filter = Builders<GameBson>.Filter.Eq(x => x.NameIndex, game.NameIndex);
+
+                var update = Builders<GameBson>.Update
+                    .Set(x => x.NameIndex, game.NameIndex)
+                    .Set(x => x.Name, game.Name)
+                    .Set(x => x.Description, game.Description)
+                    .Set(x => x.UpdatedDate, game.UpdatedDate)
+                    .Set(x => x.GameType, game.GameType);
+
+                await Items.UpdateOneAsync(filter, update);
             }
             catch (InvalidOperationException ex)
             {

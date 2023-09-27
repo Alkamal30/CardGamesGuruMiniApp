@@ -30,7 +30,6 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         {
             var game = new Game()
             {
-                Id = Guid.NewGuid(),
                 Name = request.Name,
                 Description = request.Description,
                 GameType = EnumMapping.MapGameType(request.GameType),
