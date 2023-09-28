@@ -9,6 +9,9 @@ using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.GameService;
 using System.Transactions;
 using System.Text.Json.Serialization;
+using React.AspNet;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+using JavaScriptEngineSwitcher.ChakraCore;
 
 namespace WebApp
 {
@@ -27,6 +30,11 @@ namespace WebApp
                     {
                         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     });
+
+            services.AddMemoryCache();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
         }
 
         private static IServiceCollection AddApplicationOptions<TOptions>(
