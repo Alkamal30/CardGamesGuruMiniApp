@@ -9,6 +9,8 @@ using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.GameService;
 using System.Transactions;
 using System.Text.Json.Serialization;
+using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
+using Services.CardGamesGuruMiniApp.Services.TotService;
 
 namespace WebApp
 {
@@ -19,6 +21,10 @@ namespace WebApp
             services.AddApplicationOptions<MongoDbOptions>(nameof(MongoDbOptions));
             services.AddMongoDatabase();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GameService)));
+
+            services.AddSingleton<ITotRepository, TotRepository>();
+            services.AddSingleton<ITotService, TotService>();
+
             services.AddSingleton<IGameRepository, GameRepository>();
             services.AddSingleton<IGameService, GameService>();
             services.AddAutoMapper(typeof(Program));
