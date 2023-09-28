@@ -6,8 +6,8 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler;
 
 public class CreateCardQuery : IRequest
 {
-    public string FirstQueston { get; set; }
-    public string SecondQueston { get; set; }
+    public string FirstQuestion { get; set; }
+    public string SecondQuestion { get; set; }
 }
 
 public class CreateCardHandler : IRequestHandler<CreateCardQuery>
@@ -24,8 +24,8 @@ public class CreateCardHandler : IRequestHandler<CreateCardQuery>
     {
         var card = new TotCard()
         {
-            FirstQuestion = request.FirstQueston,
-            SecondQuestion = request.SecondQueston,
+            FirstQuestion = request.FirstQuestion,
+            SecondQuestion = request.SecondQuestion,
             CardId = Guid.NewGuid(),
             CreatedDate = DateTime.UtcNow
         };

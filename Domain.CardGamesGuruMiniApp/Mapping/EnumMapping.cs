@@ -21,7 +21,7 @@ namespace Domain.CardGamesGuruMiniApp.Mapping
                 case "MultiPlayerGame":
                     return GameType.MultiPlayerGame; break;
                 default:
-                    return GameType.NoPlayersJustCards; break;
+                    return GameType.None; break;
             }
         }
     }
