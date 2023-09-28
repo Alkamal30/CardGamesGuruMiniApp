@@ -32,7 +32,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
             {
                 Name = String.IsNullOrEmpty(request.Name) ? String.Empty : request.Name,
                 Description = String.IsNullOrEmpty(request.Description) ? String.Empty : request.Description,
-                GameType = String.IsNullOrEmpty(request.GameType) ? GameType.NoPlayers : EnumMapping.MapGameType(request.GameType),
+                GameType = String.IsNullOrEmpty(request.GameType) ? GameType.NoPlayersJustCards : EnumMapping.MapGameType(request.GameType),
                 UpdatedDate = DateTime.UtcNow,
                 NameIndex = request.NameIndex
             };
