@@ -1,4 +1,6 @@
+using React.AspNet;
 using WebApp;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,14 @@ if (!app.Environment.IsDevelopment()) {
     app.UseHsts();
 }
 
+
+app.UseDeveloperExceptionPage();
+
+app.UseReact(config => { });
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -26,7 +36,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-
-
-
