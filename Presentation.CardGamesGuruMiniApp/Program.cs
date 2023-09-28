@@ -9,12 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddConfig();
 
-//...
+
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddReact();
 builder.Services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
-//.
+
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -24,13 +24,13 @@ if (!app.Environment.IsDevelopment()) {
     app.UseHsts();
 }
 
-//...
+
 app.UseDeveloperExceptionPage();
 
 app.UseReact(config => { });
 app.UseDefaultFiles();
 app.UseStaticFiles();
-//.
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
