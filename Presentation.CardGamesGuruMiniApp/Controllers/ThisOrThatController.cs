@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.CardGamesGuruMiniApp.Handlers.GameHandler;
 
@@ -24,11 +25,11 @@ public class ThisOrThatController : ControllerBase
 
     [HttpPost]
     [Route("create")]
-    public async Task<ActionResult> CreateCard([FromBody] CreateCardQuery query)
+    public async Task<ActionResult<TotCard>> CreateCard([FromBody] CreateCardQuery query)
     {
 
-        await _mediator.Send(query);
+        var result = await _mediator.Send(query);
 
-        return Ok();
+        return Ok(result);
     }
 }
