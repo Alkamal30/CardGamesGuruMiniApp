@@ -2,6 +2,7 @@
 using Infrastructure.CardGamesGuruMiniApp.Models.TotModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
+using System;
 
 namespace Services.CardGamesGuruMiniApp.Services.TotService
 {
@@ -24,6 +25,24 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
 
             await _totRepository.CreateCard(cardBson);
 
+        }
+
+        public async Task<List<TotCard>> GetAllTotCardsAsync()
+        {
+            var listBson = await _totRepository.GetAllCards();
+
+            var result = listBson
+                .Select(x => new TotCard()
+                {
+                    CardId = x.CardId,
+                    CreatedDate = x.CreatedDate,
+                    UpdatedDate = x.UpdatedDate,
+                    FirstQuestion = x.FirstQuestion,
+                    SecondQuestion = x.SecondQuestion
+                })
+                .ToList();
+
+            return result;
         }
 
         public async Task<TotCard> GetTotCardAsync(Guid guid)

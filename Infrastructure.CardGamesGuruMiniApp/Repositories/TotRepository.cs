@@ -31,6 +31,18 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             }
         }
 
+        public async Task<List<TotBson>> GetAllCards()
+        {
+            try
+            {
+                return await Items.Find(Builders<TotBson>.Filter.Empty).ToListAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<TotBson> GetCard(Guid guid)
         {
             try

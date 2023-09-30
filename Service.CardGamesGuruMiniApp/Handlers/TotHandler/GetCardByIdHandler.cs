@@ -5,22 +5,22 @@ using Services.CardGamesGuruMiniApp.Services.GameService;
 
 namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler;
 
-public class GetCardRandomQuery : IRequest<TotCard>
+public class GetCardByIdQuery : IRequest<TotCard>
 {
    public string CardId { get; set; }
 }
 
-public class GetCardRandomHandler : IRequestHandler<GetCardRandomQuery, TotCard>
+public class GetCardByIdHandler : IRequestHandler<GetCardByIdQuery, TotCard>
 {
 
     private readonly ITotService _totService;
 
-    public GetCardRandomHandler(ITotService totService)
+    public GetCardByIdHandler(ITotService totService)
     {
         _totService = totService;
     }
 
-    public async Task<TotCard> Handle(GetCardRandomQuery request, CancellationToken cancellationToken)
+    public async Task<TotCard> Handle(GetCardByIdQuery request, CancellationToken cancellationToken)
     {
         var guid = String.IsNullOrEmpty(request.CardId) ?
             Guid.NewGuid() : 
