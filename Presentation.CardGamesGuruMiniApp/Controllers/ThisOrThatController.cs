@@ -15,10 +15,20 @@ public class ThisOrThatController : ControllerBase
 
     [HttpGet]
     [Route("card")]
-    public async Task<ActionResult> GetCard([FromBody] GetCardRandomQuery query)
+    public async Task<ActionResult> GetCard([FromBody] GetCardByIdQuery query)
     {
 
         var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("allcards")]
+    public async Task<ActionResult<List<TotCard>>> GetAllCards()
+    {
+
+        var result = await _mediator.Send(new GetAllCardsQuery());
 
         return Ok(result);
     }
