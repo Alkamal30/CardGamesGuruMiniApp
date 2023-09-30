@@ -1,3 +1,4 @@
+using React.AspNet;
 using WebApp;
 using Serilog;
 using Serilog.Core;
@@ -8,7 +9,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyModel;
 using Serilog.Extensions.Logging;
 using Serilog.Settings.Configuration;
-
 
 try
 {
@@ -39,6 +39,10 @@ try
 
     var app = builder.Build();
     app.UseStaticFiles();
+    app.UseDeveloperExceptionPage();
+
+    app.UseReact(config => { });
+    app.UseDefaultFiles();
 
     // Configure the HTTP request pipeline.
     if (!app.Environment.IsDevelopment())
@@ -49,7 +53,6 @@ try
     }
     
     app.UseHttpsRedirection();
-
     app.UseRouting();
     
     app.UseAuthorization();
@@ -70,9 +73,5 @@ finally
 {
     Log.CloseAndFlush();
 }
-
-
-
-
 
 
