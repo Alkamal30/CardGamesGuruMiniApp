@@ -32,14 +32,7 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
             var listBson = await _totRepository.GetAllCards();
 
             var result = listBson
-                .Select(x => new TotCard()
-                {
-                    CardId = x.CardId,
-                    CreatedDate = x.CreatedDate,
-                    UpdatedDate = x.UpdatedDate,
-                    FirstQuestion = x.FirstQuestion,
-                    SecondQuestion = x.SecondQuestion
-                })
+                .Select(x => _mapper.Map<TotCard>(x))
                 .ToList();
 
             return result;
