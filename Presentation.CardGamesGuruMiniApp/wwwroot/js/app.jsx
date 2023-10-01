@@ -6,20 +6,11 @@ tg.enableClosingConfirmation();
 tg.MainButton.text = "Next Card";
 tg.MainButton.color = "#31B545";
 tg.MainButton.show();
-tg.BackButton.show();
-
-
-let questions = ['First', 'Second', 'Third'];
-
-function nxtCard() {
-
-}
 
 
 function Card() {
-    const [questionIndex, setQuestionIndex] = React.useState(0);
-    const [firstQuestion, setFirstQuestion] = React.useState(questions[0]);
-    const [secondQuestion, setSecondQuestion] = React.useState(questions[0]);
+    const [firstQuestion, setFirstQuestion] = React.useState('Example First Question');
+    const [secondQuestion, setSecondQuestion] = React.useState('Example Second Question');
 
     React.useEffect(() => {
         tg.MainButton.onClick(nextCard);
@@ -29,15 +20,13 @@ function Card() {
     }, [nextCard])
 
     function nextCard() {
-        if(questionIndex + 1 >= questions.length) {
-            setQuestionIndex(0);
-        }
-        else {
-            setQuestionIndex(questionIndex + 1);
-        }
-
-        setFirstQuestion(questions[questionIndex]);
-        setSecondQuestion(questions[questionIndex]);
+        fetch('/api/tot/cardrandom/')
+            .then(response => response.json())
+            .then(card => {
+                console.log(card);
+                setFirstQuestion(card.firstQuestion);
+                setSecondQuestion(card.secondQuestion);
+            });
     }
     
     return (
