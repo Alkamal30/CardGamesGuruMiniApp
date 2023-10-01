@@ -31,11 +31,11 @@ try
     });
 
     var app = builder.Build();
-    app.UseStaticFiles();
     app.UseDeveloperExceptionPage();
 
     app.UseReact(config => { });
     app.UseDefaultFiles();
+    app.UseStaticFiles();
 
     // Configure the HTTP request pipeline.
     if (!app.Environment.IsDevelopment())

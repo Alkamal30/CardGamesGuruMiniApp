@@ -36,7 +36,7 @@ namespace WebApp
                         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     });
 
-            services.AddMemoryCache();
+            //services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddReact();
             services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
