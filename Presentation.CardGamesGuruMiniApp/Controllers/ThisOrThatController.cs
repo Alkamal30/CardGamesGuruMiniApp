@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.CardGamesGuruMiniApp.Handlers.GameHandler;
+using Services.CardGamesGuruMiniApp.Handlers.TotHandler;
 
 namespace WebApp.Controllers;
 
@@ -19,6 +20,16 @@ public class ThisOrThatController : ControllerBase
     {
 
         var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("cardrandom")]
+    public async Task<ActionResult> GetRandomCard()
+    {
+
+        var result = await _mediator.Send(new GetRandomCardQuery());
 
         return Ok(result);
     }

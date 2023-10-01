@@ -1,5 +1,4 @@
-﻿
-namespace Domain.CardGamesGuruMiniApp.Entities.TotEntities
+﻿namespace Domain.CardGamesGuruMiniApp.Entities.TotEntities
 {
     public class TotCard
     {

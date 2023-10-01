@@ -8,30 +8,19 @@ namespace Services.CardGamesGuruMiniApp.Services.GameService;
 
 public class GameService : IGameService
 {
-    private readonly IGameRepository gameRepository;
-    private readonly IMapper mapper;
+    private readonly IGameRepository _gameRepository;
+    private readonly IMapper _mapper;
     public GameService(IGameRepository gameRepository, IMapper mapper)
     {
-        this.gameRepository = gameRepository;
-        this.mapper = mapper;
+        _gameRepository = gameRepository;
+        _mapper = mapper;
     }
 
     public async Task CreateGameAsync(Game game)
     {
-        var item = new GameBson()
-        {
-            Name = game.Name,
-            Description = game.Description,
-            NameIndex = game.NameIndex,
-            CreatedDate = game.CreatedDate,
-            GameType = game.GameType,
-        };
-
-        //item = mapper.Map<GameBson>(game);
+        var gameBson = _mapper.Map<GameBson>(game);
         
-
-        await gameRepository.CreateGame(item);
-
+        await _gameRepository.CreateGame(gameBson);
     }
 
 
@@ -39,15 +28,10 @@ public class GameService : IGameService
     {
         var result = new Game();
 
-        var game = await gameRepository.GetGameByNameIndex(nameIndex);
+        var game = await _gameRepository.GetGameByNameIndex(nameIndex);
         if (game == null) return result;
 
-        result.Name = game.Name;
-        result.Description = game.Description;
-        result.NameIndex = game.NameIndex;
-        result.CreatedDate = game.CreatedDate;
-        result.UpdatedDate = game.UpdatedDate;
-        result.GameType = game.GameType;
+        result = _mapper.Map<Game>(game);
 
         return result;
     }
@@ -56,20 +40,13 @@ public class GameService : IGameService
     {
         var result = new List<Game>();
 
-        var gamesList = await gameRepository.GetGames();
+        var gamesList = await _gameRepository.GetGames();
         if (gamesList == null) return result;
 
         foreach (var item in gamesList)
         {
-            result.Add(new Game
-            {
-                Name = item.Name,
-                GameType = item.GameType,
-                CreatedDate = item.CreatedDate,
-                NameIndex=item.NameIndex,
-                Description = item.Description,
-                UpdatedDate = item.UpdatedDate
-            });
+            var game = new Game();
+            result.Add(_mapper.Map<Game>(item));
         }
 
         return result;
@@ -77,15 +54,8 @@ public class GameService : IGameService
 
     public async Task UpdateGameAsync(Game game)
     {
-        var request = new GameBson();
+        var gameBson = _mapper.Map<GameBson>(game);
 
-        request.Name = game.Name;
-        request.Description = game.Description;
-        request.NameIndex = game.NameIndex;
-        request.UpdatedDate = game.UpdatedDate;
-        request.GameType = game.GameType;
-
-        await gameRepository.UpdateGame(request);
-
+        await _gameRepository.UpdateGame(gameBson);
     }
 }

@@ -54,5 +54,10 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
                 throw new Exception(ex.Message);
             }
         }
+
+        public Task<TotBson> GetRandomCard()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
