@@ -1,15 +1,11 @@
-﻿using AutoMapper.Internal.Mappers;
-using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
-using Domain.CardGamesGuruMiniApp.Enums.GameEnums;
+﻿using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Domain.CardGamesGuruMiniApp.Mapping;
 using MediatR;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
-using System.Text.Json.Serialization;
 
 namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
 {
-
-    public class CreateGameQuery : IRequest
+    public class CreateGameQuery : IRequest<Game>
     {
         public string Name { get; set; }
         public string NameIndex { get; set; }
@@ -17,8 +13,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         public string GameType { get; set; }
     }
 
-
-    internal class CreateGameHandler : IRequestHandler<CreateGameQuery>
+    internal class CreateGameHandler : IRequestHandler<CreateGameQuery, Game>
     {
         private readonly IGameService gameService;
 
@@ -26,7 +21,8 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         {
             this.gameService = gameService;
         }
-        public async Task Handle(CreateGameQuery request, CancellationToken cancellationToken)
+
+        public async Task<Game> Handle(CreateGameQuery request, CancellationToken cancellationToken)
         {
             var game = new Game()
             {
@@ -38,6 +34,8 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
             };
 
             await gameService.CreateGameAsync(game);
+
+            return game;
         }
     }
 }

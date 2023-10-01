@@ -1,14 +1,11 @@
-﻿using AutoMapper.Internal.Mappers;
-using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
+﻿using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Domain.CardGamesGuruMiniApp.Enums.GameEnums;
 using Domain.CardGamesGuruMiniApp.Mapping;
 using MediatR;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
-using System.Text.Json.Serialization;
 
 namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
 {
-
     public class UpdateGameQuery : IRequest
     {
         public string Name { get; set; }
@@ -16,7 +13,6 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         public string Description { get; set; }
         public string GameType { get; set; }
     }
-
 
     internal class UpdateGameHandler : IRequestHandler<UpdateGameQuery>
     {
@@ -26,6 +22,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         {
             this.gameService = gameService;
         }
+
         public async Task Handle(UpdateGameQuery request, CancellationToken cancellationToken)
         {
             var game = new Game()
