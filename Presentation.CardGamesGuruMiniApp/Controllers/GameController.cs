@@ -36,13 +36,13 @@ public class GameController : ControllerBase
     [Route("create")]
     public async Task<ActionResult> CreateNewGame(CreateGameQuery query)
     {
-        await _mediator.Send(query);
-        return Ok();
+        var result = await _mediator.Send(query);
+        return Ok(result);
     }
 
     [HttpPost]
     [Route("update")]
-    public async Task<ActionResult> Updateame(UpdateGameQuery query)
+    public async Task<ActionResult> UpdateGame(UpdateGameQuery query)
     {
         await _mediator.Send(query);
         return Ok();

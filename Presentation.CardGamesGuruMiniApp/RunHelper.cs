@@ -41,6 +41,8 @@ namespace WebApp
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddReact();
             services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         private static IServiceCollection AddApplicationOptions<TOptions>(

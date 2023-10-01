@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
 {
 
-    public class CreateGameQuery : IRequest
+    public class CreateGameQuery : IRequest<Game>
     {
         public string Name { get; set; }
         public string NameIndex { get; set; }
@@ -18,7 +18,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
     }
 
 
-    internal class CreateGameHandler : IRequestHandler<CreateGameQuery>
+    internal class CreateGameHandler : IRequestHandler<CreateGameQuery,Game>
     {
         private readonly IGameService gameService;
 
@@ -26,7 +26,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         {
             this.gameService = gameService;
         }
-        public async Task Handle(CreateGameQuery request, CancellationToken cancellationToken)
+        public async Task<Game> Handle(CreateGameQuery request, CancellationToken cancellationToken)
         {
             var game = new Game()
             {
@@ -38,6 +38,8 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
             };
 
             await gameService.CreateGameAsync(game);
+
+            return game;
         }
     }
 }
