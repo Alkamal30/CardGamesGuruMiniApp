@@ -11,7 +11,5 @@ public class Game
     public DateTime UpdatedDate { get; set; }
     public GameType GameType { get; set; }
 
-
     // image? and other fields?
-
 }

@@ -1,5 +1,4 @@
-﻿
-namespace Infrastructure.CardGamesGuruMiniApp
+﻿namespace Infrastructure.CardGamesGuruMiniApp
 {
     public class MongoCollections
     {

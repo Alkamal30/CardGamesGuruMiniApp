@@ -1,19 +1,18 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
-using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Infrastructure.CardGamesGuruMiniApp.Repositories;
+using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
-using Services.CardGamesGuruMiniApp.Services.GameService;
-using System.Transactions;
-using System.Text.Json.Serialization;
-using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
-using Services.CardGamesGuruMiniApp.Services.TotService;
 using React.AspNet;
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
-using JavaScriptEngineSwitcher.ChakraCore;
+using Services.CardGamesGuruMiniApp.Services.GameService;
+using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
+using Services.CardGamesGuruMiniApp.Services.TotService;
+using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace WebApp
 {
@@ -80,10 +79,7 @@ namespace WebApp
         {
             BsonClassMap.RegisterClassMap<GameBson>();
         }
-
     }
-
-
 
     public class BindOptions<TOptions> : IConfigureOptions<TOptions> where TOptions : class
     {
@@ -93,10 +89,10 @@ namespace WebApp
         {
             _config = config ?? throw new ArgumentNullException();
         }
+
         public void Configure(TOptions options)
         {
             _config.Bind(options);
         }
-
     }
 }

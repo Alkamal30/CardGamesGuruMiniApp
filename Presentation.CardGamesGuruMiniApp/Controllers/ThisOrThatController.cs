@@ -18,7 +18,6 @@ public class ThisOrThatController : ControllerBase
     [Route("card")]
     public async Task<ActionResult> GetCard([FromBody] GetCardByIdQuery query)
     {
-
         var result = await _mediator.Send(query);
 
         return Ok(result);
@@ -28,7 +27,6 @@ public class ThisOrThatController : ControllerBase
     [Route("cardrandom")]
     public async Task<ActionResult> GetRandomCard()
     {
-
         var result = await _mediator.Send(new GetRandomCardQuery());
 
         return Ok(result);
@@ -38,7 +36,6 @@ public class ThisOrThatController : ControllerBase
     [Route("allcards")]
     public async Task<ActionResult<List<TotCard>>> GetAllCards()
     {
-
         var result = await _mediator.Send(new GetAllCardsQuery());
 
         return Ok(result);
@@ -48,7 +45,6 @@ public class ThisOrThatController : ControllerBase
     [Route("create")]
     public async Task<ActionResult<TotCard>> CreateCard([FromBody] CreateCardQuery query)
     {
-
         var result = await _mediator.Send(query);
 
         return Ok(result);

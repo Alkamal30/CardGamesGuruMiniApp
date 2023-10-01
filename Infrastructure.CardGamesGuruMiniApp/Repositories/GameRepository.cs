@@ -1,16 +1,14 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
-using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System.Security.Claims;
 
 namespace Infrastructure.CardGamesGuruMiniApp.Repositories
 {
     public class GameRepository : BaseRepository<GameBson>, IGameRepository
     {
-        public GameRepository(IMongoDatabase database,IOptions<MongoDbOptions> mongoDbOptions) : base(database, mongoDbOptions)
+        public GameRepository(IMongoDatabase database, IOptions<MongoDbOptions> mongoDbOptions) : base(database, mongoDbOptions)
         {
             collection = MongoCollections.Games;
         }
@@ -21,12 +19,11 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             {
                 await Items.InsertOneAsync(game);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-
 
         public async Task<GameBson> GetGameByNameIndex(string nameIndex)
         {
@@ -46,7 +43,7 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             {
                 return await Items.Find(Builders<GameBson>.Filter.Empty).ToListAsync();
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -72,6 +69,5 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
                 throw new Exception(ex.Message);
             }
         }
-
     }
 }

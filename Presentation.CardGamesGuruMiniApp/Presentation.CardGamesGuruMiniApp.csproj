@@ -33,6 +33,10 @@
     <ProjectReference Include="..\Service.CardGamesGuruMiniApp\Services.CardGamesGuruMiniApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://appsemble.app/api.json" appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

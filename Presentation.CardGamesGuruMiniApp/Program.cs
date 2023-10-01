@@ -1,18 +1,11 @@
-using React.AspNet;
-using WebApp;
-using Serilog;
-using Serilog.Core;
-using Serilog.Events;
-using Serilog.Formatting.Json;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyModel;
+using React.AspNet;
+using Serilog;
 using Serilog.Extensions.Logging;
-using Serilog.Settings.Configuration;
+using WebApp;
 
 try
 {
-
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
@@ -51,10 +44,10 @@ try
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
     }
-    
+
     app.UseHttpsRedirection();
     app.UseRouting();
-    
+
     app.UseAuthorization();
 
     app.MapControllerRoute(
@@ -62,8 +55,6 @@ try
         pattern: "{controller=Home}/{action=Index}/{id?}");
 
     app.Run();
-
-
 }
 catch (Exception ex)
 {
@@ -73,5 +64,3 @@ finally
 {
     Log.CloseAndFlush();
 }
-
-

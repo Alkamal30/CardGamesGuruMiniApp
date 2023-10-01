@@ -1,8 +1,8 @@
-using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
-using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
-using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
-using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using AutoMapper;
+using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
+using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
+using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
+using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
 
 namespace Services.CardGamesGuruMiniApp.Services.GameService;
 
@@ -10,6 +10,7 @@ public class GameService : IGameService
 {
     private readonly IGameRepository _gameRepository;
     private readonly IMapper _mapper;
+
     public GameService(IGameRepository gameRepository, IMapper mapper)
     {
         _gameRepository = gameRepository;
@@ -19,10 +20,9 @@ public class GameService : IGameService
     public async Task CreateGameAsync(Game game)
     {
         var gameBson = _mapper.Map<GameBson>(game);
-        
+
         await _gameRepository.CreateGame(gameBson);
     }
-
 
     public async Task<Game> GetGameByNameIndexAsync(string nameIndex)
     {
