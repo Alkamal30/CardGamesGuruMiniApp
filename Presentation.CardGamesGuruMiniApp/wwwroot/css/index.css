@@ -15,6 +15,7 @@ body {
 #root {
     width: 100%;
     height: 100%;
+    background-color: var(--tg-theme-secondary-bg-color);
 }
 
 
@@ -34,7 +35,6 @@ body {
     align-items: center;
     padding: 10px 15px;
     border-radius: 25px;
-    box-shadow: 4px 4px 10px gray;
     background-color: rgb(248, 248, 248);
 }
 
