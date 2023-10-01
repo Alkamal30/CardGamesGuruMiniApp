@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.TotModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.CardGamesGuruMiniApp.Profiles
 {

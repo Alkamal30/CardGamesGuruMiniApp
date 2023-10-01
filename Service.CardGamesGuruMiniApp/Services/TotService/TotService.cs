@@ -3,7 +3,6 @@ using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.TotModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
-using System;
 
 namespace Services.CardGamesGuruMiniApp.Services.TotService
 {
@@ -11,7 +10,8 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
     {
         private ITotRepository _totRepository;
         public readonly IMapper _mapper;
-        public TotService(ITotRepository totRepository,IMapper mapper)
+
+        public TotService(ITotRepository totRepository, IMapper mapper)
         {
             _totRepository = totRepository;
             _mapper = mapper;
@@ -24,7 +24,6 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
             cardBson = _mapper.Map<TotBson>(totCard);
 
             await _totRepository.CreateCard(cardBson);
-
         }
 
         public async Task<List<TotCard>> GetAllTotCardsAsync()
@@ -47,7 +46,7 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
             var cardBson = listBson.OrderBy(x => random.Next()).FirstOrDefault();
 
             var card = _mapper.Map<TotCard>(cardBson);
-            
+
             return card;
         }
 

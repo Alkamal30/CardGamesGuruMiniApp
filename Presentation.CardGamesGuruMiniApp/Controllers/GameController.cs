@@ -16,7 +16,6 @@ public class GameController : ControllerBase
     [Route("gamebyname")]
     public async Task<ActionResult> GetGameInformationByNameIndex(string nameIndex)
     {
-
         var result = await _mediator.Send(new GetGameInformationByNameIndexQuery()
         {
             NameIndex = nameIndex
