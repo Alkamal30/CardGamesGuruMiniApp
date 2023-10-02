@@ -10,13 +10,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: var(--tg-theme-secondary-bg-color);
 }
 
 #root {
     width: 100%;
     height: 100%;
-    background-color: var(--tg-theme-secondary-bg-color);
 }
 
 
@@ -97,4 +96,37 @@ body {
     margin: 0px;
     margin-left: -2px;
     margin-top: -5px;
+}
+
+
+
+/* GAMES LIST STYLES */
+
+.games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;  
+    max-width: 600px;
+}
+
+
+/* GAME STYLES */
+
+.game {
+    padding: 20px;
+    color: white;
+    background: linear-gradient(to right top, red, orange);
+    border-radius: 20px;
+    min-height: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-title {
+    color: white;
+    font-size: 32px;
+    font-weight:bold;
 }
