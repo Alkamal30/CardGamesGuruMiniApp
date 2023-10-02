@@ -18,6 +18,13 @@ body {
     height: 100%;
 }
 
+.app {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* CARD STYLES */
 
 .card-block {
     width: 100%;
@@ -102,6 +109,11 @@ body {
 
 /* GAMES LIST STYLES */
 
+.games-list-block {
+    width: 100%;
+    height: 100%;
+}
+
 .games-list {
     display: flex;
     flex-direction: column;
@@ -129,4 +141,28 @@ body {
     color: white;
     font-size: 32px;
     font-weight:bold;
+}
+
+.game-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-start-menu {
+
+}
+
+.game-start-menu__title {
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+}
+
+.game-start-menu__description {
+    font-size: 48px;
+    font-weight: 400;
+    color: white;
 }
