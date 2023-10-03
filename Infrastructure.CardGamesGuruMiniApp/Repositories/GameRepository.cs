@@ -60,7 +60,9 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
                     .Set(x => x.Name, game.Name)
                     .Set(x => x.Description, game.Description)
                     .Set(x => x.UpdatedDate, game.UpdatedDate)
-                    .Set(x => x.GameType, game.GameType);
+                    .Set(x => x.GameType, game.GameType)
+                    .Set(x => x.Colors, game.Colors)
+                    .Set(x => x.Endpoint, game.Endpoint);
 
                 await Items.UpdateOneAsync(filter, update);
             }

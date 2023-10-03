@@ -3,6 +3,7 @@ using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
+using Services.CardGamesGuruMiniApp.Validations;
 
 namespace Services.CardGamesGuruMiniApp.Services.GameService;
 
@@ -19,6 +20,7 @@ public class GameService : IGameService
 
     public async Task CreateGameAsync(Game game)
     {
+        if (!game.IsGameValid()) throw new Exception("Not valid game object");
         var gameBson = _mapper.Map<GameBson>(game);
 
         await _gameRepository.CreateGame(gameBson);
@@ -54,6 +56,8 @@ public class GameService : IGameService
 
     public async Task UpdateGameAsync(Game game)
     {
+        if (!game.IsGameValid()) throw new Exception("Not valid game object");
+
         var gameBson = _mapper.Map<GameBson>(game);
 
         await _gameRepository.UpdateGame(gameBson);

@@ -30,6 +30,10 @@ namespace Infrastructure.CardGamesGuruMiniApp.Profiles
                     opt => opt.MapFrom(src => $"{src.UpdatedDate}")
                 )
                 .ForMember(
+                    dest => dest.Endpoint,
+                    opt => opt.MapFrom(src => $"{src.Endpoint}")
+                )
+                .ForMember(
                     dest => dest.GameType,
                     opt => opt.MapFrom(src => $"{src.GameType}")
                 );
@@ -54,6 +58,10 @@ namespace Infrastructure.CardGamesGuruMiniApp.Profiles
                 .ForMember(
                     dest => dest.UpdatedDate,
                     opt => opt.MapFrom(src => $"{src.UpdatedDate}")
+                )
+                .ForMember(
+                    dest => dest.Endpoint,
+                    opt => opt.MapFrom(src => $"{src.Endpoint}")
                 )
                 .ForMember(
                     dest => dest.GameType,
