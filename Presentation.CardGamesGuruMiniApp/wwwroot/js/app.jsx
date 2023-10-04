@@ -3,7 +3,6 @@ const tg = window.Telegram.WebApp;
 tg.expand();
 tg.enableClosingConfirmation();
 
-tg.MainButton.color = "#31B545";
 tg.MainButton.hide();
 
 function Card(props) {
@@ -32,12 +31,14 @@ function Card(props) {
     }, [closeGame]);
 
     function nextCard() {
+        tg.MainButton.showProgress();
+
         fetch('/api/tot/cardrandom/')
             .then(response => response.json())
             .then(card => {
-                console.log(card);
                 setFirstQuestion(card.firstQuestion);
                 setSecondQuestion(card.secondQuestion);
+                tg.MainButton.hideProgress();
             });
     }
 
@@ -46,9 +47,10 @@ function Card(props) {
     }
 
     return (
-        <div className="card">
+        <div className="card"
+            style={{background: `linear-gradient(180deg, ${props.game.colors[0]}, ${props.game.colors[1]})`}}>
             <div className="card-head">
-                This or That
+                { props.game.name }
             </div>
             <div className="card-body">
                 <div className="card-body__question">
@@ -91,6 +93,7 @@ function GameStartMenu(props) {
     }, [closeGame]);
 
     function startGame() {
+        tg.MainButton.showProgress();
         setIsGameStarted(true);
     }
 
@@ -111,7 +114,7 @@ function GameStartMenu(props) {
                         </div>
                     </div>
                 ) : (
-                    <Card close={closeGame} />
+                    <Card close={closeGame} game={props.game} />
                 )
             }
         </div>
@@ -120,7 +123,8 @@ function GameStartMenu(props) {
 
 function Game(props) {
     return (
-       <div className="game" onClick={() => props.clicked(props.game)}>
+       <div className="game" onClick={() => props.clicked(props.game)}
+            style={{background: `linear-gradient(to right top, ${props.game.colors[0]}, ${props.game.colors[1]})`}}>
             <div className="game-title">{props.game.name}</div>
        </div>
     );
