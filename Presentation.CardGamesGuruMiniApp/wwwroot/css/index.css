@@ -43,7 +43,7 @@ body {
     padding: 10px 15px;
     border-radius: 25px;
     border: 10px solid white;
-    background: linear-gradient(0deg, rgb(121, 166, 210), rgb(45, 89, 134));
+    background: linear-gradient(180deg, rgb(121, 166, 210), rgb(45, 89, 134));
 }
 
 .card-head {
@@ -122,9 +122,12 @@ body {
 /* GAME STYLES */
 
 .game {
+    --bg-color-first: rgb(35, 144, 35);
+    --bg-color-second: rgb(111, 220, 111);
+
     padding: 20px;
     color: white;
-    background: linear-gradient(to right top, red, orange);
+    background: linear-gradient(to right top, var(--bg-color-first), var(--bg-color-second));
     border-radius: 20px;
     min-height: 80px;
     display: flex;
@@ -141,22 +144,29 @@ body {
 .game-screen {
     width: 100%;
     height: 100%;
+    padding: 20px 15px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .game-start-menu {
+    width: 100%;
+    height: 100%;
 }
 
 .game-start-menu__title {
+    width: 100%;
     font-size: 48px;
     font-weight: 800;
-    color: white;
+    color: var(--text_color);
+    text-align: center;
 }
 
 .game-start-menu__description {
-    font-size: 48px;
+    font-size: 24px;
     font-weight: 400;
-    color: white;
+    line-height: 110%;
+    color: var(--hint-color);
+    text-align: justify;
 }
