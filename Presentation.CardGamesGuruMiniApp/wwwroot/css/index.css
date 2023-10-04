@@ -23,7 +23,6 @@ body {
     height: 100%;
 }
 
-
 /* CARD STYLES */
 
 .card-block {
@@ -99,13 +98,11 @@ body {
     z-index: 1;
 }
 
-.card-body__split-circle p {
-    margin: 0px;
-    margin-left: -2px;
-    margin-top: -5px;
-}
-
-
+    .card-body__split-circle p {
+        margin: 0px;
+        margin-left: -2px;
+        margin-top: -5px;
+    }
 
 /* GAMES LIST STYLES */
 
@@ -118,10 +115,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;  
+    padding: 20px;
     max-width: 600px;
 }
-
 
 /* GAME STYLES */
 
@@ -131,7 +127,6 @@ body {
     background: linear-gradient(to right top, red, orange);
     border-radius: 20px;
     min-height: 80px;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,7 +135,7 @@ body {
 .game-title {
     color: white;
     font-size: 32px;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .game-screen {
@@ -152,7 +147,6 @@ body {
 }
 
 .game-start-menu {
-
 }
 
 .game-start-menu__title {

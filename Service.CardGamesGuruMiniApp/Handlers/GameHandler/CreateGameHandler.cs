@@ -11,6 +11,8 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         public string NameIndex { get; set; }
         public string Description { get; set; }
         public string GameType { get; set; }
+        public string Endpoint { get; set; }
+        public List<string> Colors { get; set; }
     }
 
     internal class CreateGameHandler : IRequestHandler<CreateGameQuery, Game>
@@ -30,7 +32,9 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
                 Description = request.Description,
                 GameType = EnumMapping.MapGameType(request.GameType),
                 CreatedDate = DateTime.UtcNow,
-                NameIndex = request.NameIndex
+                NameIndex = request.NameIndex,
+                Endpoint = request.Endpoint,
+                Colors = request.Colors
             };
 
             await gameService.CreateGameAsync(game);

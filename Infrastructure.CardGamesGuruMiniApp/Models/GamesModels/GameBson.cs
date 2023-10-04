@@ -22,5 +22,8 @@ namespace Infrastructure.CardGamesGuruMiniApp.Models.GamesModels
 
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime UpdatedDate { get; set; }
+
+        public string Endpoint { get; set; }
+        public List<string> Colors { get; set; }
     }
 }

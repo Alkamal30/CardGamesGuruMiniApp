@@ -6,7 +6,6 @@ tg.enableClosingConfirmation();
 tg.MainButton.color = "#31B545";
 tg.MainButton.hide();
 
-
 function Card(props) {
     const [firstQuestion, setFirstQuestion] = React.useState('');
     const [secondQuestion, setSecondQuestion] = React.useState('');
@@ -45,7 +44,7 @@ function Card(props) {
     function closeGame() {
         props.close();
     }
-    
+
     return (
         <div className="card">
             <div className="card-head">
@@ -54,7 +53,7 @@ function Card(props) {
             <div className="card-body">
                 <div className="card-body__question">
                     { firstQuestion }
-                </div>  
+                </div>
                 <div className="card-body__split-line">
                     <div className="card-body__split-circle">
                         <p>or</p>
@@ -123,7 +122,7 @@ function Game(props) {
     return (
        <div className="game" onClick={() => props.clicked(props.game)}>
             <div className="game-title">{props.game.name}</div>
-       </div> 
+       </div>
     );
 }
 
