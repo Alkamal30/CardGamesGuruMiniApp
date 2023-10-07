@@ -5,13 +5,14 @@ using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using JavaScriptEngineSwitcher.ChakraCore;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using React.AspNet;
 using Services.CardGamesGuruMiniApp.Services.GameService;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
-using Services.CardGamesGuruMiniApp.Services.TodService.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TodService;
+using Services.CardGamesGuruMiniApp.Services.TodService.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TotService;
 using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
 using System.Text.Json.Serialization;
@@ -26,14 +27,15 @@ namespace WebApp
             services.AddMongoDatabase();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GameService)));
 
-            services.AddSingleton<ITotRepository, TotRepository>();
-            services.AddSingleton<ITotService, TotService>();
+            services.AddTransient<ITotRepository, TotRepository>();
+            services.AddTransient<ITotService, TotService>();
 
-            services.AddSingleton<ITodService, TodService>();
-            services.AddSingleton<ITodRepository, TodRepository>();
+            services.AddTransient<ITodService, TodService>();
+            services.AddTransient<ITodRepository, TodRepository>();
 
-            services.AddSingleton<IGameRepository, GameRepository>();
-            services.AddSingleton<IGameService, GameService>();
+            services.AddTransient<IGameRepository, GameRepository>();
+            services.AddTransient<IGameService, GameService>();
+
             services.AddAutoMapper(typeof(Program));
             services.AddControllers()
                     .AddJsonOptions(options =>
@@ -47,6 +49,26 @@ namespace WebApp
             services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "CardGamesGuruMiniApp API",
+                    Description = "An ASP.NET Core Web API for managing CardGamesGuruMiniApp items",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Contacts",
+                        Url = new Uri("https://t.me/EvoMorphey")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT",
+                        Url = new Uri("https://github.com/Alkamal30/CardGamesGuruMiniApp/blob/main/LICENSE")
+                    }
+                });
+            });
         }
 
         private static IServiceCollection AddApplicationOptions<TOptions>(

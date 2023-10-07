@@ -45,6 +45,9 @@ try
         app.UseHsts();
     }
 
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
     app.UseHttpsRedirection();
     app.UseRouting();
 

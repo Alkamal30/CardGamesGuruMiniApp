@@ -124,7 +124,6 @@ body {
 .game {
     --bg-color-first: rgb(35, 144, 35);
     --bg-color-second: rgb(111, 220, 111);
-
     padding: 20px;
     color: white;
     background: linear-gradient(to right top, var(--bg-color-first), var(--bg-color-second));

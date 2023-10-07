@@ -3,7 +3,6 @@ using Domain.CardGamesGuruMiniApp.Entities.TodEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.TodModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TodService.Interfaces;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Services.CardGamesGuruMiniApp.Services.TodService
 {
