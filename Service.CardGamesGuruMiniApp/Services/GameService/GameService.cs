@@ -26,6 +26,18 @@ public class GameService : IGameService
         await _gameRepository.CreateGame(gameBson);
     }
 
+    public async Task<Game> DeleteGameByNameIndexAsync(string nameIndex)
+    {
+        var result = new Game();
+
+        var game = await _gameRepository.DeleteByNameIndex(nameIndex);
+        if (game == null) return result;
+
+        result = _mapper.Map<Game>(game);
+
+        return result;
+    }
+
     public async Task<Game> GetGameByNameIndexAsync(string nameIndex)
     {
         var result = new Game();

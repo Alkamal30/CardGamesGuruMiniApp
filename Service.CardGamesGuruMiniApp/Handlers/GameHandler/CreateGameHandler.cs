@@ -13,6 +13,7 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
         public string GameType { get; set; }
         public string Endpoint { get; set; }
         public List<string> Colors { get; set; }
+        public string Font { get; set; }
     }
 
     internal class CreateGameHandler : IRequestHandler<CreateGameQuery, Game>
@@ -34,7 +35,8 @@ namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler
                 CreatedDate = DateTime.UtcNow,
                 NameIndex = request.NameIndex,
                 Endpoint = request.Endpoint,
-                Colors = request.Colors
+                Colors = request.Colors,
+                Font = request.Font
             };
 
             await gameService.CreateGameAsync(game);
