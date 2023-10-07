@@ -2,23 +2,29 @@
 using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.TotModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
+using Services.CardGamesGuruMiniApp.Extensions;
 using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
+using System.Collections.Concurrent;
 
 namespace Services.CardGamesGuruMiniApp.Services.TotService
 {
     public class TotService : ITotService
     {
+        private static ConcurrentQueue<TotCard> _uniqueCardsQueue;
+
         private ITotRepository _totRepository;
         private readonly IMapper _mapper;
 
-        private List<TotBson> _usedCards;
+
+        static TotService() 
+        {
+            _uniqueCardsQueue = new ConcurrentQueue<TotCard>();
+        }
 
         public TotService(ITotRepository totRepository, IMapper mapper)
         {
             _totRepository = totRepository;
             _mapper = mapper;
-
-            _usedCards = new List<TotBson>();
         }
 
         public async Task CreateTotCardAsync(TotCard totCard)
@@ -43,13 +49,12 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
 
         public async Task<TotCard> GetRandomTotCardAsync()
         {
-            var listBson = await _totRepository.GetAllCards();
+            if(_uniqueCardsQueue.Count == 0) 
+            {
+                await FillUniqueCardsQueue();
+            }
 
-            Random random = new Random();
-
-            var cardBson = listBson.OrderBy(x => random.Next()).FirstOrDefault();
-
-            var card = _mapper.Map<TotCard>(cardBson);
+            _uniqueCardsQueue.TryDequeue(out TotCard card);
 
             return card;
         }
@@ -70,6 +75,18 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
             var card = _mapper.Map<TotCard>(result);
 
             return card;
+        }
+
+
+        private async Task FillUniqueCardsQueue() 
+        {
+            List<TotCard> allCardsList = await GetAllTotCardsAsync();
+            allCardsList.Shuffle();
+
+            foreach(TotCard card in allCardsList) 
+            {
+                _uniqueCardsQueue.Enqueue(card);
+            }
         }
     }
 }
