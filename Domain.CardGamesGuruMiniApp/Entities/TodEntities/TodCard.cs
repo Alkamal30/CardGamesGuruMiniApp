@@ -9,4 +9,3 @@
         public DateTime UpdatedDate { get; set; }
     }
 }
-

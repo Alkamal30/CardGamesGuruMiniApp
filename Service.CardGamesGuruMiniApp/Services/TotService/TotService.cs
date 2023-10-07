@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
-using Infrastructure.CardGamesGuruMiniApp.Models.TodModels;
 using Infrastructure.CardGamesGuruMiniApp.Models.TotModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
