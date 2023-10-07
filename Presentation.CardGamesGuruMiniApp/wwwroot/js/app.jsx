@@ -136,7 +136,7 @@ function GamesList() {
 
     React.useEffect(() => {
         getAllGames();
-    });
+    }, []);
 
     function getAllGames() {
         fetch('/api/game/games')
