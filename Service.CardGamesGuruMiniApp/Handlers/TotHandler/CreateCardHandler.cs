@@ -10,11 +10,11 @@ public class CreateCardQuery : IRequest<TotCard>
     public string SecondQuestion { get; set; }
 }
 
-public class CreateCardHandler : IRequestHandler<CreateCardQuery, TotCard>
+public class CreateTodCardHandler : IRequestHandler<CreateCardQuery, TotCard>
 {
     private readonly ITotService _totService;
 
-    public CreateCardHandler(ITotService totService)
+    public CreateTodCardHandler(ITotService totService)
     {
         _totService = totService;
     }

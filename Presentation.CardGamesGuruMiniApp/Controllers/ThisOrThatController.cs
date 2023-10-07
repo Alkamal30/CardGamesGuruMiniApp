@@ -23,6 +23,15 @@ public class ThisOrThatController : ControllerBase
         return Ok(result);
     }
 
+    [HttpDelete]
+    [Route("delete")]
+    public async Task<ActionResult> DeleteCard([FromBody] DeleteCardQuery query)
+    {
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+
     [HttpGet]
     [Route("cardrandom")]
     public async Task<ActionResult> GetRandomCard()

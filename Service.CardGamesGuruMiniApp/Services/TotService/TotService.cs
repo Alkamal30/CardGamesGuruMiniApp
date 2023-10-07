@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
+using Infrastructure.CardGamesGuruMiniApp.Models.TodModels;
 using Infrastructure.CardGamesGuruMiniApp.Models.TotModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
@@ -9,12 +10,16 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
     public class TotService : ITotService
     {
         private ITotRepository _totRepository;
-        public readonly IMapper _mapper;
+        private readonly IMapper _mapper;
+
+        private List<TotBson> _usedCards;
 
         public TotService(ITotRepository totRepository, IMapper mapper)
         {
             _totRepository = totRepository;
             _mapper = mapper;
+
+            _usedCards = new List<TotBson>();
         }
 
         public async Task CreateTotCardAsync(TotCard totCard)
@@ -53,6 +58,15 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
         public async Task<TotCard> GetTotCardAsync(Guid guid)
         {
             var result = await _totRepository.GetCard(guid);
+
+            var card = _mapper.Map<TotCard>(result);
+
+            return card;
+        }
+
+        public async Task<TotCard> DeleteTotCardAsync(Guid guid)
+        {
+            var result = await _totRepository.DeleteCard(guid);
 
             var card = _mapper.Map<TotCard>(result);
 

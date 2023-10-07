@@ -10,6 +10,8 @@ using MongoDB.Driver;
 using React.AspNet;
 using Services.CardGamesGuruMiniApp.Services.GameService;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
+using Services.CardGamesGuruMiniApp.Services.TodService.Interfaces;
+using Services.CardGamesGuruMiniApp.Services.TodService;
 using Services.CardGamesGuruMiniApp.Services.TotService;
 using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
 using System.Text.Json.Serialization;
@@ -26,6 +28,9 @@ namespace WebApp
 
             services.AddSingleton<ITotRepository, TotRepository>();
             services.AddSingleton<ITotService, TotService>();
+
+            services.AddSingleton<ITodService, TodService>();
+            services.AddSingleton<ITodRepository, TodRepository>();
 
             services.AddSingleton<IGameRepository, GameRepository>();
             services.AddSingleton<IGameService, GameService>();
