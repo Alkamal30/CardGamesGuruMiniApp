@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'MartianMono';
+    src: url('../fonts/MartianMono.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SpaceGrotesk';
+    src: url('../fonts/SpaceGrotesk.ttf') format('truetype');
+}
+
+
+
 html {
     width: 100%;
     height: 100%;
@@ -56,6 +68,8 @@ body {
 
 .card-block_tot .card-head {
     color: white;
+    font-family: 'MartianMono';
+    font-size: 28px;
 }
 
 .card-block_tot .card-body {
@@ -127,6 +141,8 @@ body {
     background-color: var(--color-blue);
     text-align: center;
     padding-top: 10px;
+    font-family: 'SpaceGrotesk';
+    font-size: 36px;
 }
 
 .card-block_tod .card-body {
