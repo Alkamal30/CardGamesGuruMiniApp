@@ -16,6 +16,7 @@ function Card(props) {
 
         document.documentElement.style.setProperty('--first-background-color', props.game.colors[0]);
         document.documentElement.style.setProperty('--second-background-color', props.game.colors[1]);
+        document.documentElement.style.setProperty('--card-title-font', props.game.font);
         nextCard();
     }, []);
 
@@ -126,7 +127,10 @@ function GameStartMenu(props) {
 function Game(props) {
     return (
        <div className="game" onClick={() => props.clicked(props.game)}
-            style={{background: `linear-gradient(to right top, ${props.game.colors[0]}, ${props.game.colors[1]})`}}>
+            style={{
+                background: `linear-gradient(to right top, ${props.game.colors[0]}, ${props.game.colors[1]})`,
+                fontFamily: props.game.font
+            }}>
             <div className="game-title">{props.game.name}</div>
        </div>
     );

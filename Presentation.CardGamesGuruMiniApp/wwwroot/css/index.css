@@ -61,14 +61,13 @@ body {
 .card-head {
     font-size: 32px;
     font-weight: 900;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--card-title-font);
 }
 
 /* TOT CARD */
 
 .card-block_tot .card-head {
     color: white;
-    font-family: 'MartianMono';
     font-size: 28px;
 }
 
@@ -141,7 +140,6 @@ body {
     background-color: var(--color-blue);
     text-align: center;
     padding-top: 10px;
-    font-family: 'SpaceGrotesk';
     font-size: 36px;
 }
 
