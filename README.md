@@ -1,6 +1,6 @@
 # [CardGamesGuruMiniApp](https://t.me/CardGamesGuru_Bot)
 Repository of Telegram MiniApp written in ASP.NET C# using React.Js.
-The main purpose of this MiniApp is a collection of a certain number of simple card games for a company, where you just need to take information from the card, and interact with your friends. Currently, there is only one game in the app: This Or That.
+The main purpose of this MiniApp is a collection of a certain number of simple card games for a company, where you just need to take information from the card, and interact with your friends.
 
 <img src="https://github.com/Alkamal30/CardGamesGuruMiniApp/assets/111704140/44bd7204-4e9b-4bfd-8342-75fa132a56ba" width="250">
 
@@ -8,7 +8,7 @@ The main purpose of this MiniApp is a collection of a certain number of simple c
 
 > The app was written for a Telegram contest.  **[Contest](https://t.me/contest/327)**
 
-# Game are implemented in mini-app
+# Games are implemented in mini-app
 ### This Or That
 What Is "This or That"? This or That is an easy-to-play word game in which you must choose between two things. These two options could be funny, mundane, or totally outrageous. Even if neither option appeals to you, you have to choose one or the other.
 
@@ -31,7 +31,7 @@ Before you begin, ensure you have the following prerequisites installed on your 
 
 **Step 3:** Run mongod.exe for start local mongodb.
 
-**Step 4:** Run debug version in your IDE.
+**Step 4:** Run Debug version in your IDE.
 
 **Step 5:** First, you need to run a couple of requests to create all the collections and the database itself in mongo.
 
@@ -53,7 +53,8 @@ Contract example:
     "Colors" : [ 
         "rgb(45, 89, 134)",
         "rgb(121, 166, 0)"
-    ]
+    ],
+    "font": "Monospace"
 }
 ```
 
@@ -63,7 +64,7 @@ Contract example:
 ```
 {
     "FirstQuestion": "Apple",
-    "SecondQuestion":"Android"
+    "SecondQuestion": "Android"
 }
 ```
 ### Local Setup - using Docker
