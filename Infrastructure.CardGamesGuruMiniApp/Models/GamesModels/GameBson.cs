@@ -25,5 +25,6 @@ namespace Infrastructure.CardGamesGuruMiniApp.Models.GamesModels
 
         public string Endpoint { get; set; }
         public List<string> Colors { get; set; }
+        public string Font { get; set; }
     }
 }

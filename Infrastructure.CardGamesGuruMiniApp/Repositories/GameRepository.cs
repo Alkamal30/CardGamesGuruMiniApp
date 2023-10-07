@@ -1,8 +1,10 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
+using Infrastructure.CardGamesGuruMiniApp.Models.TodModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System;
 
 namespace Infrastructure.CardGamesGuruMiniApp.Repositories
 {
@@ -30,6 +32,21 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             try
             {
                 return await Items.Find(Builders<GameBson>.Filter.Eq(x => x.NameIndex, nameIndex)).FirstAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<GameBson> DeleteByNameIndex(string nameIndex)
+        {
+            try
+            {
+                var result = await Items.Find(Builders<GameBson>.Filter.Eq(x => x.NameIndex, nameIndex)).FirstAsync();
+                await Items.FindOneAndDeleteAsync(Builders<GameBson>.Filter.Eq(x => x.NameIndex, nameIndex));
+
+                return result;
             }
             catch (InvalidOperationException ex)
             {

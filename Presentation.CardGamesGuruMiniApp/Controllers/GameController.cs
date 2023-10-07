@@ -39,6 +39,14 @@ public class GameController : ControllerBase
         return Ok(result);
     }
 
+    [HttpDelete]
+    [Route("delete")]
+    public async Task<ActionResult> DeleteGame(DeleteGameQuery query)
+    {
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+
     [HttpPost]
     [Route("update")]
     public async Task<ActionResult> UpdateGame(UpdateGameQuery query)
