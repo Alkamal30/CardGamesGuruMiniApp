@@ -9,5 +9,7 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces
         public Task<List<TotBson>> GetAllCards();
 
         public Task CreateCard(TotBson totBson);
+
+        public Task<TotBson> DeleteCard(Guid guid);
     }
 }

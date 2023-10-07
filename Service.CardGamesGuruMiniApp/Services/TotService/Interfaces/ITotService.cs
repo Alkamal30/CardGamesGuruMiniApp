@@ -7,6 +7,7 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService.Interfaces
         public Task<TotCard> GetTotCardAsync(Guid guid);
 
         public Task<TotCard> GetRandomTotCardAsync();
+        public Task<TotCard> DeleteTotCardAsync(Guid guid);
 
         public Task<List<TotCard>> GetAllTotCardsAsync();
 
