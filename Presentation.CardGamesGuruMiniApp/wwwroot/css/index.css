@@ -43,17 +43,22 @@ body {
     padding: 10px 15px;
     border-radius: 25px;
     border: 10px solid white;
-    background: linear-gradient(180deg, rgb(121, 166, 210), rgb(45, 89, 134));
+    background: linear-gradient(180deg, var(--first-background-color), var(--second-background-color));
 }
 
 .card-head {
-    color: white;
     font-size: 32px;
     font-weight: 900;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.card-body {
+/* TOT CARD */
+
+.card-block_tot .card-head {
+    color: white;
+}
+
+.card-block_tot .card-body {
     width: 100%;
     display: grid;
     grid-template-rows: 1fr 30px 1fr;
@@ -63,14 +68,14 @@ body {
     padding-top: 10px;
 }
 
-.card-body__question {
+.card-block_tot .card-body__question {
     color: white;
     font-weight: 600;
     text-align: center;
     word-wrap: break-word;
 }
 
-.card-body__split-line {
+.card-block_tot .card-body__split-line {
     width: 100%;
     height: 50%;
     display: flex;
@@ -79,7 +84,7 @@ body {
     box-sizing: border-box;
 }
 
-.card-body__split-circle {
+.card-block_tot .card-body__split-circle {
     position: relative;
     left: calc(50% - 25px);
     top: 50%;
@@ -98,11 +103,70 @@ body {
     z-index: 1;
 }
 
-    .card-body__split-circle p {
-        margin: 0px;
-        margin-left: -2px;
-        margin-top: -5px;
-    }
+.card-block_tot .card-body__split-circle::after {
+    content: 'or';
+    margin: 0px;
+    margin-left: -2px;
+    margin-top: -5px;
+}
+
+/* TOD CARD */
+
+.card-block_tod .card {
+    --color-red: rgb(204, 51, 0);
+    --color-blue: rgb(0, 107, 179);
+
+    background: white;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.card-block_tod .card-head {
+    width: 100%;
+    color: white;
+    background-color: var(--color-blue);
+    text-align: center;
+    padding-top: 10px;
+}
+
+.card-block_tod .card-body {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 10px 1fr;
+    align-items: center;
+    padding: 0px;
+}
+
+.card-block_tod .card-body__split-line {
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 10px solid white;
+    box-sizing: border-box;
+}
+
+.card-block_tod .card-body__question {
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.card-block_tod .card-body__question:first-child {
+    background-color: var(--color-blue);
+}
+
+.card-block_tod .card-body__question:last-child {
+    background-color: var(--color-red);
+}
+
 
 /* GAMES LIST STYLES */
 
