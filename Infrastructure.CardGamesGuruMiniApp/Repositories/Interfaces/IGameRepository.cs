@@ -8,6 +8,8 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces
 
         Task<GameBson> GetGameByNameIndex(string nameIndex);
 
+        Task<GameBson> DeleteByNameIndex(string nameIndex);
+
         Task CreateGame(GameBson game);
 
         Task UpdateGame(GameBson game);
