@@ -3,8 +3,12 @@ Repository of Telegram MiniApp written in ASP.NET C# using React.Js.
 The main purpose of this MiniApp is a collection of a certain number of simple card games for a company, where you just need to take information from the card, and interact with your friends. Currently, there is only one game in the app: This Or That.
 > The app was written for a Telegram contest.  **[Contest](https://t.me/contest/327)**
 
-# This Or That
+# Game are implemented in mini-app
+### This Or That
 What Is "This or That"? This or That is an easy-to-play word game in which you must choose between two things. These two options could be funny, mundane, or totally outrageous. Even if neither option appeals to you, you have to choose one or the other.
+
+### Truth Or Dare
+Truth or dare? is a mostly verbal party game requiring two or more players. Players are given the choice between answering a question truthfully, or performing a "dare". The game is particularly popular among adolescents and children, and is sometimes used as a forfeit when gambling.
 
 # How-to-Setup
 
@@ -74,5 +78,12 @@ We have an application running on a local machine that can only be accessed from
 1. Create your own bot. **[Telegram bot creating tutorial](https://core.telegram.org/bots)** 
 2. Take the URL of your web page, like ``https://localhost:5001``
 3. Change ``localhost`` to ``127.0.0.1``
-4. In the BotFather pick to **Edit Web App Url**.
+4. In the BotFather pick to **Edit Main Button Url**.
 5. And send him your URL. ``https://127.0.0.1:5001``
+
+# Documentation and Swagger.
+To see all possible API requests and contracts, you can use Swagger.
+
+Just add ``/swagger`` to the end: ``https://localhost:5001/swagger``
+
+Other information about mini-app on Wiki: **[CardGamesGuruMiniApp Wiki](https://github.com/Alkamal30/CardGamesGuruMiniApp/wiki)** 
