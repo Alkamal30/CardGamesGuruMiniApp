@@ -30,8 +30,8 @@ namespace WebApp
             services.AddTransient<ITotRepository, TotRepository>();
             services.AddTransient<ITotService, TotService>();
 
-            services.AddTransient<ITodService, TodService>();
             services.AddTransient<ITodRepository, TodRepository>();
+            services.AddTransient<ITodService, TodService>();
 
             services.AddTransient<IGameRepository, GameRepository>();
             services.AddTransient<IGameService, GameService>();
