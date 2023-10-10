@@ -1,10 +1,8 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
-using Infrastructure.CardGamesGuruMiniApp.Models.TodModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
 
 namespace Infrastructure.CardGamesGuruMiniApp.Repositories
 {

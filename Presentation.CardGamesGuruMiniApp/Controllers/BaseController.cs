@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace WebApp.Controllers
 {
@@ -13,6 +11,5 @@ namespace WebApp.Controllers
         {
             _mediator = mediator;
         }
-
     }
 }

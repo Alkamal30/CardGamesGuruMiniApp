@@ -15,8 +15,7 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
         private ITotRepository _totRepository;
         private readonly IMapper _mapper;
 
-
-        static TotService() 
+        static TotService()
         {
             _uniqueCardsQueue = new ConcurrentQueue<TotCard>();
         }
@@ -49,7 +48,7 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
 
         public async Task<TotCard> GetRandomTotCardAsync()
         {
-            if(_uniqueCardsQueue.Count == 0) 
+            if (_uniqueCardsQueue.Count == 0)
             {
                 await FillUniqueCardsQueue();
             }
@@ -77,13 +76,12 @@ namespace Services.CardGamesGuruMiniApp.Services.TotService
             return card;
         }
 
-
-        private async Task FillUniqueCardsQueue() 
+        private async Task FillUniqueCardsQueue()
         {
             List<TotCard> allCardsList = await GetAllTotCardsAsync();
             allCardsList.Shuffle();
 
-            foreach(TotCard card in allCardsList) 
+            foreach (TotCard card in allCardsList)
             {
                 _uniqueCardsQueue.Enqueue(card);
             }
