@@ -1,4 +1,5 @@
 ﻿using Domain.CardGamesGuruMiniApp.Entities.TodEntities;
+using Domain.CardGamesGuruMiniApp.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.CardGamesGuruMiniApp.Handlers.TodHandler;
@@ -7,11 +8,12 @@ namespace WebApp.Controllers;
 
 [Route("api/tod")]
 [ApiController]
-public class TruthOrDateController : ControllerBase
+public class TruthOrDateController : BaseController
 {
-    private readonly IMediator _mediator;
+    public TruthOrDateController(IMediator mediator) : base (mediator)
+    {
 
-    public TruthOrDateController(IMediator mediator) => _mediator = mediator;
+    }
 
     [HttpGet]
     [Route("card")]
@@ -24,6 +26,7 @@ public class TruthOrDateController : ControllerBase
 
     [HttpDelete]
     [Route("delete")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<ActionResult> DeleteCard([FromBody] DeleteToDCardQuery query)
     {
         var result = await _mediator.Send(query);
@@ -51,6 +54,7 @@ public class TruthOrDateController : ControllerBase
 
     [HttpPost]
     [Route("create")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<ActionResult<TodCard>> CreateCard([FromBody] CreateToDCardQuery query)
     {
         var result = await _mediator.Send(query);

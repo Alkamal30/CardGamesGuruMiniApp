@@ -1,4 +1,5 @@
 ﻿using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
+using Domain.CardGamesGuruMiniApp.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.CardGamesGuruMiniApp.Handlers.GameHandler;
@@ -8,11 +9,12 @@ namespace WebApp.Controllers;
 
 [Route("api/tot")]
 [ApiController]
-public class ThisOrThatController : ControllerBase
+public class ThisOrThatController : BaseController
 {
-    private readonly IMediator _mediator;
+    public ThisOrThatController(IMediator mediator) : base(mediator)
+    {
 
-    public ThisOrThatController(IMediator mediator) => _mediator = mediator;
+    }
 
     [HttpGet]
     [Route("card")]
@@ -25,6 +27,7 @@ public class ThisOrThatController : ControllerBase
 
     [HttpDelete]
     [Route("delete")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<ActionResult> DeleteCard([FromBody] DeleteCardQuery query)
     {
         var result = await _mediator.Send(query);
@@ -52,6 +55,7 @@ public class ThisOrThatController : ControllerBase
 
     [HttpPost]
     [Route("create")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<ActionResult<TotCard>> CreateCard([FromBody] CreateCardQuery query)
     {
         var result = await _mediator.Send(query);

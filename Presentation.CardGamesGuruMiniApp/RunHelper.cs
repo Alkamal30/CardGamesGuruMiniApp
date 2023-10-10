@@ -1,4 +1,5 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
+using Domain.CardGamesGuruMiniApp.Filters;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
@@ -69,6 +70,8 @@ namespace WebApp
                     }
                 });
             });
+
+            services.AddScoped<ApiKeyAuthFilter>();
         }
 
         private static IServiceCollection AddApplicationOptions<TOptions>(
