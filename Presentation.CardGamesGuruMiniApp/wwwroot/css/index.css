@@ -10,6 +10,12 @@
 
 
 
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 html {
     width: 100%;
     height: 100%;
@@ -59,7 +65,7 @@ body {
 }
 
 .card-head {
-    font-size: 32px;
+    font-size: 1.5em;
     font-weight: 900;
     font-family: var(--card-title-font);
 }
@@ -68,7 +74,6 @@ body {
 
 .card-block_tot .card-head {
     color: white;
-    font-size: 28px;
 }
 
 .card-block_tot .card-body {
@@ -140,7 +145,6 @@ body {
     background-color: var(--color-blue);
     text-align: center;
     padding-top: 10px;
-    font-size: 36px;
 }
 
 .card-block_tod .card-body {
