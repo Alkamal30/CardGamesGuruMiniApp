@@ -16,7 +16,6 @@ public class GameController : ControllerBase
     [Route("gamebyname")]
     public async Task<ActionResult> GetGameInformationByNameIndex(string nameIndex)
     {
-
         var result = await _mediator.Send(new GetGameInformationByNameIndexQuery()
         {
             NameIndex = nameIndex
@@ -36,13 +35,21 @@ public class GameController : ControllerBase
     [Route("create")]
     public async Task<ActionResult> CreateNewGame(CreateGameQuery query)
     {
-        await _mediator.Send(query);
-        return Ok();
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+
+    [HttpDelete]
+    [Route("delete")]
+    public async Task<ActionResult> DeleteGame(DeleteGameQuery query)
+    {
+        var result = await _mediator.Send(query);
+        return Ok(result);
     }
 
     [HttpPost]
     [Route("update")]
-    public async Task<ActionResult> Updateame(UpdateGameQuery query)
+    public async Task<ActionResult> UpdateGame(UpdateGameQuery query)
     {
         await _mediator.Send(query);
         return Ok();

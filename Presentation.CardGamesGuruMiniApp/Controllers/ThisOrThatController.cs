@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Services.CardGamesGuruMiniApp.Handlers.GameHandler;
+using Services.CardGamesGuruMiniApp.Handlers.TotHandler;
 
 namespace WebApp.Controllers;
 
@@ -14,21 +16,46 @@ public class ThisOrThatController : ControllerBase
 
     [HttpGet]
     [Route("card")]
-    public async Task<ActionResult> GetCard([FromBody] GetCardRandomQuery query)
+    public async Task<ActionResult> GetCard([FromBody] GetCardByIdQuery query)
     {
-
         var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+
+    [HttpDelete]
+    [Route("delete")]
+    public async Task<ActionResult> DeleteCard([FromBody] DeleteCardQuery query)
+    {
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("cardrandom")]
+    public async Task<ActionResult> GetRandomCard()
+    {
+        var result = await _mediator.Send(new GetRandomCardQuery());
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("allcards")]
+    public async Task<ActionResult<List<TotCard>>> GetAllCards()
+    {
+        var result = await _mediator.Send(new GetAllCardsQuery());
 
         return Ok(result);
     }
 
     [HttpPost]
     [Route("create")]
-    public async Task<ActionResult> CreateCard([FromBody] CreateCardQuery query)
+    public async Task<ActionResult<TotCard>> CreateCard([FromBody] CreateCardQuery query)
     {
+        var result = await _mediator.Send(query);
 
-        await _mediator.Send(query);
-
-        return Ok();
+        return Ok(result);
     }
 }

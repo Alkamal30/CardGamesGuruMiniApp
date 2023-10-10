@@ -1,14 +1,8 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
-using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Models.TotModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.CardGamesGuruMiniApp.Repositories
 {
@@ -24,6 +18,33 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             try
             {
                 await Items.InsertOneAsync(totBson);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<TotBson> DeleteCard(Guid guid)
+        {
+            try
+            {
+                var result = await Items.Find(Builders<TotBson>.Filter.Eq(x => x.CardId, guid)).FirstAsync();
+                await Items.DeleteOneAsync(Builders<TotBson>.Filter.Eq(x => x.CardId, guid));
+
+                return result;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<TotBson>> GetAllCards()
+        {
+            try
+            {
+                return await Items.Find(Builders<TotBson>.Filter.Empty).ToListAsync();
             }
             catch (InvalidOperationException ex)
             {

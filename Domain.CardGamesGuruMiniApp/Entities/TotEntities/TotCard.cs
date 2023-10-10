@@ -1,5 +1,4 @@
-﻿
-namespace Domain.CardGamesGuruMiniApp.Entities.TotEntities
+﻿namespace Domain.CardGamesGuruMiniApp.Entities.TotEntities
 {
     public class TotCard
     {
@@ -9,5 +8,4 @@ namespace Domain.CardGamesGuruMiniApp.Entities.TotEntities
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
     }
-
 }

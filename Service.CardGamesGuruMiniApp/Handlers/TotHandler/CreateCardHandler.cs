@@ -1,26 +1,25 @@
-﻿using MediatR;
-using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
+﻿using Domain.CardGamesGuruMiniApp.Entities.TotEntities;
+using MediatR;
 using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
 
 namespace Services.CardGamesGuruMiniApp.Handlers.GameHandler;
 
-public class CreateCardQuery : IRequest
+public class CreateCardQuery : IRequest<TotCard>
 {
     public string FirstQuestion { get; set; }
     public string SecondQuestion { get; set; }
 }
 
-public class CreateCardHandler : IRequestHandler<CreateCardQuery>
+public class CreateTodCardHandler : IRequestHandler<CreateCardQuery, TotCard>
 {
-
     private readonly ITotService _totService;
 
-    public CreateCardHandler(ITotService totService)
+    public CreateTodCardHandler(ITotService totService)
     {
         _totService = totService;
     }
 
-    public async Task Handle(CreateCardQuery request, CancellationToken cancellationToken)
+    public async Task<TotCard> Handle(CreateCardQuery request, CancellationToken cancellationToken)
     {
         var card = new TotCard()
         {
@@ -32,5 +31,6 @@ public class CreateCardHandler : IRequestHandler<CreateCardQuery>
 
         await _totService.CreateTotCardAsync(card);
 
+        return card;
     }
 }

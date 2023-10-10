@@ -1,16 +1,21 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
-using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Infrastructure.CardGamesGuruMiniApp.Repositories;
+using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
+using React.AspNet;
 using Services.CardGamesGuruMiniApp.Services.GameService;
-using System.Transactions;
-using System.Text.Json.Serialization;
-using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
+using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
+using Services.CardGamesGuruMiniApp.Services.TodService;
+using Services.CardGamesGuruMiniApp.Services.TodService.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TotService;
+using Services.CardGamesGuruMiniApp.Services.TotService.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace WebApp
 {
@@ -22,17 +27,48 @@ namespace WebApp
             services.AddMongoDatabase();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GameService)));
 
-            services.AddSingleton<ITotRepository, TotRepository>();
-            services.AddSingleton<ITotService, TotService>();
+            services.AddTransient<ITotRepository, TotRepository>();
+            services.AddTransient<ITotService, TotService>();
 
-            services.AddSingleton<IGameRepository, GameRepository>();
-            services.AddSingleton<IGameService, GameService>();
+            services.AddTransient<ITodRepository, TodRepository>();
+            services.AddTransient<ITodService, TodService>();
+
+            services.AddTransient<IGameRepository, GameRepository>();
+            services.AddTransient<IGameService, GameService>();
+
             services.AddAutoMapper(typeof(Program));
             services.AddControllers()
                     .AddJsonOptions(options =>
                     {
                         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     });
+
+            //services.AddMemoryCache();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "CardGamesGuruMiniApp API",
+                    Description = "An ASP.NET Core Web API for managing CardGamesGuruMiniApp items",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Contacts",
+                        Url = new Uri("https://t.me/EvoMorphey")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT",
+                        Url = new Uri("https://github.com/Alkamal30/CardGamesGuruMiniApp/blob/main/LICENSE")
+                    }
+                });
+            });
         }
 
         private static IServiceCollection AddApplicationOptions<TOptions>(
@@ -70,10 +106,7 @@ namespace WebApp
         {
             BsonClassMap.RegisterClassMap<GameBson>();
         }
-
     }
-
-
 
     public class BindOptions<TOptions> : IConfigureOptions<TOptions> where TOptions : class
     {
@@ -83,10 +116,10 @@ namespace WebApp
         {
             _config = config ?? throw new ArgumentNullException();
         }
+
         public void Configure(TOptions options)
         {
             _config.Bind(options);
         }
-
     }
 }

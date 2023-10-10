@@ -1,10 +1,4 @@
 ﻿using Domain.CardGamesGuruMiniApp.Enums.GameEnums;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.CardGamesGuruMiniApp.Mapping
 {
@@ -17,11 +11,13 @@ namespace Domain.CardGamesGuruMiniApp.Mapping
             switch (gameType)
             {
                 case "NoPlayersJustCards":
-                    return GameType.NoPlayersJustCards; break;
+                    return GameType.NoPlayersJustCards;
+
                 case "MultiPlayerGame":
-                    return GameType.MultiPlayerGame; break;
+                    return GameType.MultiPlayerGame;
+
                 default:
-                    return GameType.None; break;
+                    return GameType.None;
             }
         }
     }

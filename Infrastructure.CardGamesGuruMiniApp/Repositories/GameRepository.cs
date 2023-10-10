@@ -1,16 +1,16 @@
 ﻿using Domain.CardGamesGuruMiniApp.Configuration;
-using Domain.CardGamesGuruMiniApp.Entities.Game.GameEntities;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
+using Infrastructure.CardGamesGuruMiniApp.Models.TodModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System.Security.Claims;
+using System;
 
 namespace Infrastructure.CardGamesGuruMiniApp.Repositories
 {
     public class GameRepository : BaseRepository<GameBson>, IGameRepository
     {
-        public GameRepository(IMongoDatabase database,IOptions<MongoDbOptions> mongoDbOptions) : base(database, mongoDbOptions)
+        public GameRepository(IMongoDatabase database, IOptions<MongoDbOptions> mongoDbOptions) : base(database, mongoDbOptions)
         {
             collection = MongoCollections.Games;
         }
@@ -21,12 +21,11 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             {
                 await Items.InsertOneAsync(game);
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-
 
         public async Task<GameBson> GetGameByNameIndex(string nameIndex)
         {
@@ -40,13 +39,28 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
             }
         }
 
+        public async Task<GameBson> DeleteByNameIndex(string nameIndex)
+        {
+            try
+            {
+                var result = await Items.Find(Builders<GameBson>.Filter.Eq(x => x.NameIndex, nameIndex)).FirstAsync();
+                await Items.FindOneAndDeleteAsync(Builders<GameBson>.Filter.Eq(x => x.NameIndex, nameIndex));
+
+                return result;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<List<GameBson>> GetGames()
         {
             try
             {
                 return await Items.Find(Builders<GameBson>.Filter.Empty).ToListAsync();
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -63,7 +77,9 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
                     .Set(x => x.Name, game.Name)
                     .Set(x => x.Description, game.Description)
                     .Set(x => x.UpdatedDate, game.UpdatedDate)
-                    .Set(x => x.GameType, game.GameType);
+                    .Set(x => x.GameType, game.GameType)
+                    .Set(x => x.Colors, game.Colors)
+                    .Set(x => x.Endpoint, game.Endpoint);
 
                 await Items.UpdateOneAsync(filter, update);
             }
@@ -72,6 +88,5 @@ namespace Infrastructure.CardGamesGuruMiniApp.Repositories
                 throw new Exception(ex.Message);
             }
         }
-
     }
 }

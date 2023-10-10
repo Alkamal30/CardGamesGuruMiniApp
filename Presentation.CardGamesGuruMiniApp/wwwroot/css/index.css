@@ -1,0 +1,253 @@
+@font-face {
+    font-family: 'MartianMono';
+    src: url('../fonts/MartianMono.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SpaceGrotesk';
+    src: url('../fonts/SpaceGrotesk.ttf') format('truetype');
+}
+
+
+
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--tg-theme-secondary-bg-color);
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+}
+
+/* CARD STYLES */
+
+.card-block {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card {
+    width: 95%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 10px solid white;
+    background: linear-gradient(180deg, var(--first-background-color), var(--second-background-color));
+}
+
+.card-head {
+    font-size: 1.5em;
+    font-weight: 900;
+    font-family: var(--card-title-font);
+}
+
+/* TOT CARD */
+
+.card-block_tot .card-head {
+    color: white;
+}
+
+.card-block_tot .card-body {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 30px 1fr;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    padding-top: 10px;
+}
+
+.card-block_tot .card-body__question {
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.card-block_tot .card-body__split-line {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid white;
+    box-sizing: border-box;
+}
+
+.card-block_tot .card-body__split-circle {
+    position: relative;
+    left: calc(50% - 25px);
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(51, 102, 153);
+    font-size: 20px;
+    font-weight: 900;
+    font-family: cursive;
+    font-style: italic;
+    border-radius: 25px;
+    background-color: white;
+    z-index: 1;
+}
+
+.card-block_tot .card-body__split-circle::after {
+    content: 'or';
+    margin: 0px;
+    margin-left: -2px;
+    margin-top: -5px;
+}
+
+/* TOD CARD */
+
+.card-block_tod .card {
+    --color-red: rgb(204, 51, 0);
+    --color-blue: rgb(0, 107, 179);
+
+    background: white;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.card-block_tod .card-head {
+    width: 100%;
+    color: white;
+    background-color: var(--color-blue);
+    text-align: center;
+    padding-top: 10px;
+}
+
+.card-block_tod .card-body {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 10px 1fr;
+    align-items: center;
+    padding: 0px;
+}
+
+.card-block_tod .card-body__split-line {
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 10px solid white;
+    box-sizing: border-box;
+}
+
+.card-block_tod .card-body__question {
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.card-block_tod .card-body__question:first-child {
+    background-color: var(--color-blue);
+}
+
+.card-block_tod .card-body__question:last-child {
+    background-color: var(--color-red);
+}
+
+
+/* GAMES LIST STYLES */
+
+.games-list-block {
+    width: 100%;
+    height: 100%;
+}
+
+.games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px;
+}
+
+/* GAME STYLES */
+
+.game {
+    --bg-color-first: rgb(35, 144, 35);
+    --bg-color-second: rgb(111, 220, 111);
+    padding: 20px;
+    color: white;
+    background: linear-gradient(to right top, var(--bg-color-first), var(--bg-color-second));
+    border-radius: 20px;
+    min-height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-title {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.game-screen {
+    width: 100%;
+    height: 100%;
+    padding: 20px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-start-menu {
+    width: 100%;
+    height: 100%;
+}
+
+.game-start-menu__title {
+    width: 100%;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--tg-theme-text-color);
+    text-align: center;
+}
+
+.game-start-menu__description {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 110%;
+    color: var(--tg-theme-hint-color);
+    text-align: justify;
+}
