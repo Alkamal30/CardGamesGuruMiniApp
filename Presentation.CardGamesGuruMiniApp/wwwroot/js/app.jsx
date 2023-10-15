@@ -180,8 +180,6 @@ function GamesList() {
 }
 
 export default function App() {
-    console.log('app created!');
-
     return (
         <div className="app">
             <GamesList />
