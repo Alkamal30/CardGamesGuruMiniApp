@@ -179,15 +179,12 @@ function GamesList() {
     );
 }
 
-function App() {
+export default function App() {
+    console.log('app created!');
+
     return (
         <div className="app">
             <GamesList />
         </div>
     );
 }
-
-ReactDOM.render(
-    <App />,
-    document.getElementById("root")
-);
