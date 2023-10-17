@@ -33,8 +33,8 @@ try
     var app = builder.Build();
     app.UseDeveloperExceptionPage();
 
-    app.UseReact(config => { });
-    app.UseDefaultFiles();
+    //app.UseReact(config => { });
+    //app.UseDefaultFiles();
     app.UseStaticFiles();
 
     // Configure the HTTP request pipeline.

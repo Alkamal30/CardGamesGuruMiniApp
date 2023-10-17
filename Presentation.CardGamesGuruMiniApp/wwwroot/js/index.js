@@ -1,4 +1,4 @@
-﻿import App from './app.jsx';
+﻿import App from "./components/App";
 
 ReactDOM.render(
     <App />,
