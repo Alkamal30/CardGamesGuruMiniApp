@@ -3,13 +3,10 @@ using Domain.CardGamesGuruMiniApp.Filters;
 using Infrastructure.CardGamesGuruMiniApp.Models.GamesModels;
 using Infrastructure.CardGamesGuruMiniApp.Repositories;
 using Infrastructure.CardGamesGuruMiniApp.Repositories.Interfaces;
-using JavaScriptEngineSwitcher.ChakraCore;
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using React.AspNet;
 using Services.CardGamesGuruMiniApp.Services.GameService;
 using Services.CardGamesGuruMiniApp.Services.GameService.Interfaces;
 using Services.CardGamesGuruMiniApp.Services.TodService;
@@ -43,11 +40,6 @@ namespace WebApp
                     {
                         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     });
-
-            //services.AddMemoryCache();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddReact();
-            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
