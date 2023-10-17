@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyModel;
-using React.AspNet;
 using Serilog;
 using Serilog.Extensions.Logging;
 using WebApp;
@@ -32,9 +31,6 @@ try
 
     var app = builder.Build();
     app.UseDeveloperExceptionPage();
-
-    //app.UseReact(config => { });
-    //app.UseDefaultFiles();
     app.UseStaticFiles();
 
     // Configure the HTTP request pipeline.
