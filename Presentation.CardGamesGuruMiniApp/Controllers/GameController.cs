@@ -1,4 +1,6 @@
+using Domain.CardGamesGuruMiniApp.Filters;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.CardGamesGuruMiniApp.Handlers.GameHandler;
 
@@ -6,11 +8,12 @@ namespace WebApp.Controllers;
 
 [Route("api/game")]
 [ApiController]
-public class GameController : ControllerBase
+public class GameController : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public GameController(IMediator mediator) => _mediator = mediator;
+    public GameController(IMediator mediator) : base(mediator)
+    {
+       
+    }
 
     [HttpGet]
     [Route("gamebyname")]
@@ -33,6 +36,7 @@ public class GameController : ControllerBase
 
     [HttpPost]
     [Route("create")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<ActionResult> CreateNewGame(CreateGameQuery query)
     {
         var result = await _mediator.Send(query);
@@ -41,6 +45,7 @@ public class GameController : ControllerBase
 
     [HttpDelete]
     [Route("delete")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<ActionResult> DeleteGame(DeleteGameQuery query)
     {
         var result = await _mediator.Send(query);
@@ -49,6 +54,7 @@ public class GameController : ControllerBase
 
     [HttpPost]
     [Route("update")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<ActionResult> UpdateGame(UpdateGameQuery query)
     {
         await _mediator.Send(query);

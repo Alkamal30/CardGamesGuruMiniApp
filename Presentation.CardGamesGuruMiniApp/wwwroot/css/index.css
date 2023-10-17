@@ -8,8 +8,6 @@
     src: url('../fonts/SpaceGrotesk.ttf') format('truetype');
 }
 
-
-
 * {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -121,19 +119,18 @@ body {
     z-index: 1;
 }
 
-.card-block_tot .card-body__split-circle::after {
-    content: 'or';
-    margin: 0px;
-    margin-left: -2px;
-    margin-top: -5px;
-}
+    .card-block_tot .card-body__split-circle::after {
+        content: 'or';
+        margin: 0px;
+        margin-left: -2px;
+        margin-top: -5px;
+    }
 
 /* TOD CARD */
 
 .card-block_tod .card {
     --color-red: rgb(204, 51, 0);
     --color-blue: rgb(0, 107, 179);
-
     background: white;
     padding: 0px;
     overflow: hidden;
@@ -177,14 +174,13 @@ body {
     word-wrap: break-word;
 }
 
-.card-block_tod .card-body__question:first-child {
-    background-color: var(--color-blue);
-}
+    .card-block_tod .card-body__question:first-child {
+        background-color: var(--color-blue);
+    }
 
-.card-block_tod .card-body__question:last-child {
-    background-color: var(--color-red);
-}
-
+    .card-block_tod .card-body__question:last-child {
+        background-color: var(--color-red);
+    }
 
 /* GAMES LIST STYLES */
 
