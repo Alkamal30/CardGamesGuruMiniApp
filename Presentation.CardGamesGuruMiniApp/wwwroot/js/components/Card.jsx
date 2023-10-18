@@ -1,10 +1,12 @@
+import { useState, useEffect } from "react";
+
 const tg = window.Telegram.WebApp;
 
 export default function Card(props) {
-    const [firstQuestion, setFirstQuestion] = React.useState('');
-    const [secondQuestion, setSecondQuestion] = React.useState('');
+    const [firstQuestion, setFirstQuestion] =  useState('');
+    const [secondQuestion, setSecondQuestion] = useState('');
 
-    React.useEffect(() => {
+    useEffect(() => {
         tg.MainButton.text = "Next Card";
         tg.MainButton.show();
         tg.BackButton.show();
@@ -15,14 +17,14 @@ export default function Card(props) {
         nextCard();
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         tg.MainButton.onClick(nextCard);
         return () => {
             tg.MainButton.offClick(nextCard);
         }
     }, [nextCard]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         tg.BackButton.onClick(closeGame);
         return () => {
             tg.BackButton.offClick(closeGame);

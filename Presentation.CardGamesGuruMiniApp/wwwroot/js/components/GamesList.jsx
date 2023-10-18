@@ -1,13 +1,14 @@
+import { useState, useEffect } from "react";
 import Game from "./Game";
 import GameStartMenu from "./GameStartMenu";
 
 const tg = window.Telegram.WebApp;
 
 function GamesList() {
-    const [allGames, setAllGames] = React.useState([]);
-    const [selectedGame, setSelectedGame] = React.useState(null);
+    const [allGames, setAllGames] = useState([]);
+    const [selectedGame, setSelectedGame] = useState(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         getAllGames();
     }, []);
 

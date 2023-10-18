@@ -1,10 +1,11 @@
+import React, { useEffect } from 'react';
 import GamesList from "./GamesList";
 
 const tg = window.Telegram.WebApp;
 
 export default function App() {
 
-    React.useEffect(() => {
+    useEffect(() => {
         tg.expand();
         tg.enableClosingConfirmation();
 

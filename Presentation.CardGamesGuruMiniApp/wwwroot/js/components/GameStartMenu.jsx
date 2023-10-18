@@ -1,24 +1,25 @@
+import { useState, useEffect } from "react";
 import Card from "./Card";
 
 const tg = window.Telegram.WebApp;
 
 export default function GameStartMenu(props) {
-    const [isGameStarted, setIsGameStarted] = React.useState(false);
+    const [isGameStarted, setIsGameStarted] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         tg.MainButton.text = "Start Game";
         tg.MainButton.show();
         tg.BackButton.show();
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         tg.MainButton.onClick(startGame);
         return () => {
             tg.MainButton.offClick(startGame);
         }
     }, [startGame]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         tg.BackButton.onClick(closeGame);
         return () => {
             tg.BackButton.offClick(closeGame);
